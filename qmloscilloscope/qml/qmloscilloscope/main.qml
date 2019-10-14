@@ -38,8 +38,8 @@ Item {
     ControlPanel {
         id: controlPanel
         anchors.top: parent.top
-        anchors.topMargin: 10
-        anchors.bottom: parent.bottom
+        anchors.topMargin: 4
+        //anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.leftMargin: 10
 //![1]
@@ -62,11 +62,11 @@ Item {
 //![2]
     ScopeView {
         id: scopeView
-        anchors.top: parent.top
+        anchors.top: controlPanel.bottom
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        anchors.left: controlPanel.right
-        height: main.height
+        anchors.left: parent.left
+        height: main.height-controlPanel.height
 
         onOpenGLSupportedChanged: {
             if (!openGLSupported) {

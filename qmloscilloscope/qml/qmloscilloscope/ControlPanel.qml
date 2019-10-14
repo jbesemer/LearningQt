@@ -30,11 +30,11 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
 
-ColumnLayout {
+RowLayout {
     property alias openGLButton: openGLButton
     property alias antialiasButton: antialiasButton
     spacing: 8
-    Layout.fillHeight: true
+    Layout.fillWidth: true
     signal animationsEnabled(bool enabled)
     signal seriesTypeChanged(string type)
     signal refreshRateChanged(variant rate);
@@ -44,7 +44,7 @@ ColumnLayout {
 
     Text {
         text: "Scope"
-        font.pointSize: 18
+        font.pointSize: 12
         color: "white"
     }
 
