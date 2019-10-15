@@ -68,6 +68,8 @@ void DataSource::update(QAbstractSeries *series)
 
 void DataSource::generateData(int type, int rowCount, int colCount)
 {
+    int period = 50;
+
     // Remove previous data
     m_data.clear();
 
@@ -81,10 +83,20 @@ void DataSource::generateData(int type, int rowCount, int colCount)
             switch (type) {
             case 0:
                 // data with sin + random component
-                y = qSin(M_PI / 50 * j) + 0.5 + QRandomGenerator::global()->generateDouble();
+                y = qSin(M_PI / period * j);
                 x = j;
                 break;
             case 1:
+                // square wave
+                y = ( j%period < period/2 );
+                x = j;
+                break;
+            case 2:
+                // pulse train
+                y = ( j%period <= 2 );
+                x = j;
+                break;
+            case 3:
                 // linear data
                 x = j;
                 y = (qreal) i / 10;
@@ -93,6 +105,7 @@ void DataSource::generateData(int type, int rowCount, int colCount)
                 // unknown, do nothing
                 break;
             }
+            y += 0.5 + QRandomGenerator::global()->generateDouble();
             points.append(QPointF(x, y));
         }
         m_data.append(points);

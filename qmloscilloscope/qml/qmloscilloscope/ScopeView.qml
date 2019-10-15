@@ -35,12 +35,13 @@ ChartView {
     id: chartView
     animationOptions: ChartView.NoAnimation
     theme: ChartView.ChartThemeDark
+    legend.visible: false
     property bool openGL: true
     property bool openGLSupported: true
     onOpenGLChanged: {
         if (openGLSupported) {
             series("signal 1").useOpenGL = openGL;
-            series("signal 2").useOpenGL = openGL;
+            //series("signal 2").useOpenGL = openGL;
         }
     }
     Component.onCompleted: {
@@ -92,7 +93,7 @@ ChartView {
         repeat: true
         onTriggered: {
             dataSource.update(chartView.series(0));
-            dataSource.update(chartView.series(1));
+            //dataSource.update(chartView.series(1));
         }
     }
     //![2]
@@ -109,9 +110,9 @@ ChartView {
                                                  axisX, axisY1);
             series1.useOpenGL = chartView.openGL
 
-            var series2 = chartView.createSeries(ChartView.SeriesTypeLine, "signal 2",
-                                                 axisX, axisY2);
-            series2.useOpenGL = chartView.openGL
+            // var series2 = chartView.createSeries(ChartView.SeriesTypeLine, "signal 2",
+            //                                     axisX, axisY2);
+            // series2.useOpenGL = chartView.openGL
         } else {
             var series1 = chartView.createSeries(ChartView.SeriesTypeScatter, "signal 1",
                                                  axisX, axisY1);
@@ -119,11 +120,11 @@ ChartView {
             series1.borderColor = "transparent";
             series1.useOpenGL = chartView.openGL
 
-            var series2 = chartView.createSeries(ChartView.SeriesTypeScatter, "signal 2",
-                                                 axisX, axisY2);
-            series2.markerSize = 2;
-            series2.borderColor = "transparent";
-            series2.useOpenGL = chartView.openGL
+            // var series2 = chartView.createSeries(ChartView.SeriesTypeScatter, "signal 2",
+            //                                      axisX, axisY2);
+            // series2.markerSize = 2;
+            // series2.borderColor = "transparent";
+            // series2.useOpenGL = chartView.openGL
         }
     }
 

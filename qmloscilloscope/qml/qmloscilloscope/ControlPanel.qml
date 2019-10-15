@@ -66,7 +66,7 @@ RowLayout {
     MultiButton {
         id: signalSourceButton
         text: "Source: "
-        items: ["sin", "linear"]
+        items: ["sine", "square", "pulse"]
         currentSelection: 0
         onSelectionChanged: signalSourceChanged(
                                 selection,
@@ -77,8 +77,8 @@ RowLayout {
     MultiButton {
         id: sampleCountButton
         text: "Samples: "
-        items: ["6", "128", "1024", "10000"]
-        currentSelection: 2
+        items: ["1024", "10000", "100000"]
+        currentSelection: 0
         onSelectionChanged: signalSourceChanged(
                                 signalSourceButton.items[signalSourceButton.currentSelection],
                                 5,

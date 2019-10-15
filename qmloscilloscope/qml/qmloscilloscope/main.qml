@@ -45,10 +45,12 @@ Item {
 //![1]
 
         onSignalSourceChanged: {
-            if (source == "sin")
-                dataSource.generateData(0, signalCount, sampleCount);
+            if (source == "sine")
+                dataSource.generateData(0, 6, sampleCount);
+            else if (source == "square")
+                dataSource.generateData(1, 6, sampleCount);
             else
-                dataSource.generateData(1, signalCount, sampleCount);
+                dataSource.generateData(2, 6, sampleCount);
             scopeView.axisX().max = sampleCount;
         }
         onSeriesTypeChanged: scopeView.changeSeriesType(type);
