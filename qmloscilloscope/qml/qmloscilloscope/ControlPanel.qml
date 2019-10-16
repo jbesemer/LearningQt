@@ -33,19 +33,64 @@ import QtQuick.Layouts 1.0
 RowLayout {
     property alias openGLButton: openGLButton
     property alias antialiasButton: antialiasButton
-    spacing: 8
     Layout.fillWidth: true
     signal animationsEnabled(bool enabled)
     signal seriesTypeChanged(string type)
+    signal acquisitionRateChanged(variant rate);
     signal refreshRateChanged(variant rate);
-    signal signalSourceChanged(string source, int signalCount, int sampleCount);
+    signal signalSourceChanged(string source, int signalCount, int sampleCount, double acquisitionRate);
     signal antialiasingEnabled(bool enabled)
     signal openGlChanged(bool enabled)
 
     Text {
-        text: "Scope"
+        text: "Meter"
         font.pointSize: 12
         color: "white"
+    }
+
+    property int constSignalCount: 5;
+
+    MultiButton {
+        id: signalSourceButton
+        text: "Source: "
+        items: ["sine", "square", "pulse"]
+        currentSelection: 0
+        onSelectionChanged: signalSourceChanged(
+                                selection,
+                                5, //constSignalCount,
+                                sampleCountButton.items[sampleCountButton.currentSelection],
+                                acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
+    }
+
+    MultiButton {
+        id: sampleCountButton
+        text: "Samples: "
+        items: ["1024", "10000", "100000"]
+        currentSelection: 0
+        onSelectionChanged: signalSourceChanged(
+                                signalSourceButton.items[signalSourceButton.currentSelection],
+                                5, //constSignalCount,
+                                selection,
+                                acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
+    }
+
+    MultiButton {
+        id: acquisitionRateButton
+        text: "Acquisition rate: "
+        items: ["60", "100", "300", "500", "1200"]
+        currentSelection: 1
+        onSelectionChanged: signalSourceChanged(
+                                signalSourceButton.items[signalSourceButton.currentSelection],
+                                5, //constSignalCount,
+                                sampleCountButton.items[sampleCountButton.currentSelection],
+                                selection);
+    }
+
+    MultiButton {
+        text: "Refresh rate: "
+        items: ["1", "24", "60"]
+        currentSelection: 2
+        onSelectionChanged: refreshRateChanged(items[currentSelection]);
     }
 
     MultiButton {
@@ -61,35 +106,6 @@ RowLayout {
         items: ["line", "scatter"]
         currentSelection: 0
         onSelectionChanged: seriesTypeChanged(items[currentSelection]);
-    }
-
-    MultiButton {
-        id: signalSourceButton
-        text: "Source: "
-        items: ["sine", "square", "pulse"]
-        currentSelection: 0
-        onSelectionChanged: signalSourceChanged(
-                                selection,
-                                5,
-                                sampleCountButton.items[sampleCountButton.currentSelection]);
-    }
-
-    MultiButton {
-        id: sampleCountButton
-        text: "Samples: "
-        items: ["1024", "10000", "100000"]
-        currentSelection: 0
-        onSelectionChanged: signalSourceChanged(
-                                signalSourceButton.items[signalSourceButton.currentSelection],
-                                5,
-                                selection);
-    }
-
-    MultiButton {
-        text: "Refresh rate: "
-        items: ["1", "24", "60"]
-        currentSelection: 2
-        onSelectionChanged: refreshRateChanged(items[currentSelection]);
     }
 
     MultiButton {

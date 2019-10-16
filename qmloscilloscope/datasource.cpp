@@ -44,13 +44,20 @@ Q_DECLARE_METATYPE(QAbstractAxis *)
 DataSource::DataSource(QQuickView *appViewer, QObject *parent) :
     QObject(parent),
     m_appViewer(appViewer),
-    m_index(-1)
+    m_index(-1),
+    m_acquisitionRate(100),
+    m_noiseFactor(0.25)
 {
     qRegisterMetaType<QAbstractSeries*>();
     qRegisterMetaType<QAbstractAxis*>();
 
     generateData(0, 5, 1024);
 }
+
+void DataSource::changeAcquisitionRate( double rate ){
+    m_acquisitionRate = rate;
+}
+
 
 void DataSource::update(QAbstractSeries *series)
 {
@@ -68,45 +75,57 @@ void DataSource::update(QAbstractSeries *series)
 
 void DataSource::generateData(int type, int rowCount, int colCount)
 {
+    m_type=type;
+    m_rowCount=rowCount;
+    m_colCount=colCount;
+    regenerateData();
+}
+
+void DataSource::regenerateData()
+    {
     int period = 50;
+    double delta = m_acquisitionRate / 100;
 
     // Remove previous data
     m_data.clear();
 
     // Append the new data depending on the type
-    for (int i(0); i < rowCount; i++) {
+    for (int i(0); i < m_rowCount; i++) {
         QVector<QPointF> points;
-        points.reserve(colCount);
-        for (int j(0); j < colCount; j++) {
+        points.reserve(m_colCount);
+        double omega = 0;
+        for (int j(0); j < m_colCount; j++) {
             qreal x(0);
             qreal y(0);
-            switch (type) {
+            switch (m_type) {
             case 0:
-                // data with sin + random component
-                y = qSin(M_PI / period * j);
+                // sin wave
+                y = qSin(M_PI / period * omega) + 1.0;
                 x = j;
                 break;
             case 1:
                 // square wave
-                y = ( j%period < period/2 );
+                y = 2*( fmod(omega,period) < period/2 );
                 x = j;
                 break;
             case 2:
                 // pulse train
-                y = ( j%period <= 2 );
+                y = 2*( fmod(omega,period) <= 2 );
                 x = j;
                 break;
             case 3:
-                // linear data
-                x = j;
+                // linear data [not used]
+                x = omega;
                 y = (qreal) i / 10;
                 break;
             default:
                 // unknown, do nothing
                 break;
             }
-            y += 0.5 + QRandomGenerator::global()->generateDouble();
+            // add random component
+            y += m_noiseFactor * QRandomGenerator::global()->generateDouble();
             points.append(QPointF(x, y));
+            omega+=delta;
         }
         m_data.append(points);
     }

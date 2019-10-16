@@ -43,14 +43,22 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 10
 //![1]
+        function sourceNameToId(source){
+            if (source == "sine")return 0;
+            else if (source == "square")return 1;
+            else if (source == "pulse")return 2;
+            else
+                return 3;
+        }
+
+        property int currentSourceId: 0;
+        property double currentAcquisitionRate: 0;
 
         onSignalSourceChanged: {
-            if (source == "sine")
-                dataSource.generateData(0, 6, sampleCount);
-            else if (source == "square")
-                dataSource.generateData(1, 6, sampleCount);
-            else
-                dataSource.generateData(2, 6, sampleCount);
+            currentSourceId = sourceNameToId(source);
+            currentAcquisitionRate=acquisitionRate;
+            dataSource.changeAcquisitionRate(currentAcquisitionRate);
+            dataSource.generateData(currentSourceId, 6, sampleCount );
             scopeView.axisX().max = sampleCount;
         }
         onSeriesTypeChanged: scopeView.changeSeriesType(type);

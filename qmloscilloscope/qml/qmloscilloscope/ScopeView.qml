@@ -142,6 +142,10 @@ ChartView {
             chartView.animationOptions = ChartView.NoAnimation;
     }
 
+    function changeAcquisitionRate(rate){
+        dataSource.changeAcquisitionRate(Number(rate))
+    }
+
     function changeRefreshRate(rate) {
         refreshTimer.interval = 1 / Number(rate) * 1000;
     }

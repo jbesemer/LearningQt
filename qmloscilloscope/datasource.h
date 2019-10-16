@@ -49,12 +49,19 @@ Q_SIGNALS:
 
 public slots:
     void generateData(int type, int rowCount, int colCount);
+    void regenerateData();
     void update(QAbstractSeries *series);
+    void changeAcquisitionRate( double rate );
 
 private:
     QQuickView *m_appViewer;
     QList<QVector<QPointF> > m_data;
     int m_index;
+    double m_acquisitionRate;
+    double m_noiseFactor;
+    int m_type;
+    int m_rowCount;
+    int m_colCount;
 };
 
 #endif // DATASOURCE_H
