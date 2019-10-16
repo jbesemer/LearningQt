@@ -48,7 +48,7 @@ RowLayout {
         color: "white"
     }
 
-    property int constSignalCount: 5;
+    readonly property int defaultSignalCount: 5;
 
     MultiButton {
         id: signalSourceButton
@@ -57,7 +57,7 @@ RowLayout {
         currentSelection: 0
         onSelectionChanged: signalSourceChanged(
                                 selection,
-                                5, //constSignalCount,
+                                defaultSignalCount,
                                 sampleCountButton.items[sampleCountButton.currentSelection],
                                 acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
     }
@@ -65,11 +65,11 @@ RowLayout {
     MultiButton {
         id: sampleCountButton
         text: "Samples: "
-        items: ["1024", "10000", "100000"]
+        items: ["1024", "3000", "10000", "30000"]
         currentSelection: 0
         onSelectionChanged: signalSourceChanged(
                                 signalSourceButton.items[signalSourceButton.currentSelection],
-                                5, //constSignalCount,
+                                defaultSignalCount,
                                 selection,
                                 acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
     }
@@ -77,18 +77,18 @@ RowLayout {
     MultiButton {
         id: acquisitionRateButton
         text: "Acquisition rate: "
-        items: ["60", "100", "300", "500", "1200"]
-        currentSelection: 1
+        items: ["10", "30", "100", "300"] //, "500", "1200"]
+        currentSelection: 2
         onSelectionChanged: signalSourceChanged(
                                 signalSourceButton.items[signalSourceButton.currentSelection],
-                                5, //constSignalCount,
+                                defaultSignalCount,
                                 sampleCountButton.items[sampleCountButton.currentSelection],
                                 selection);
     }
 
     MultiButton {
         text: "Refresh rate: "
-        items: ["1", "24", "60"]
+        items: ["1", "24", "60", "100"]
         currentSelection: 2
         onSelectionChanged: refreshRateChanged(items[currentSelection]);
     }

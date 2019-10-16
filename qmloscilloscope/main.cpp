@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
                                       QString::fromLatin1("qml")));
     QObject::connect(viewer.engine(), &QQmlEngine::quit, &viewer, &QWindow::close);
 
-    viewer.setTitle(QStringLiteral("QML Oscilloscope"));
+    viewer.setTitle(QStringLiteral("Coherent Osprey Meter"));
 
     DataSource dataSource(&viewer);
     viewer.rootContext()->setContextProperty("dataSource", &dataSource);
