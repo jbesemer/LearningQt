@@ -4,5 +4,7 @@
         <file>qml/qmloscilloscope/ControlPanel.qml</file>
         <file>qml/qmloscilloscope/ScopeView.qml</file>
         <file>qml/qmloscilloscope/MultiButton.qml</file>
+        <file>../Images/action_pause.png</file>
+        <file>../Images/action_play.png</file>
     </qresource>
 </RCC>
