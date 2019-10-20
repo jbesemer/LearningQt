@@ -42,12 +42,6 @@ RowLayout {
     signal antialiasingEnabled(bool enabled)
     signal openGlChanged(bool enabled)
 
-    Text {
-        text: "Meter"
-        font.pointSize: 12
-        color: "white"
-    }
-
     readonly property int defaultSignalCount: 5;
 
     MultiButton {

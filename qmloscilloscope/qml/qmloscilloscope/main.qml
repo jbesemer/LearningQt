@@ -28,6 +28,7 @@
 ****************************************************************************/
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 
 //![1]
 Item {
@@ -35,37 +36,53 @@ Item {
     width: 600
     height: 400
 
-    ControlPanel {
-        id: controlPanel
+    RowLayout{
         anchors.top: parent.top
-        anchors.topMargin: 4
-        //anchors.bottom: parent.bottom
         anchors.left: parent.left
-        anchors.leftMargin: 10
-//![1]
-        function sourceNameToId(source){
-            if (source == "sine")return 0;
-            else if (source == "square")return 1;
-            else if (source == "pulse")return 2;
-            else
-                return 3;
+        anchors.leftMargin: 4
+        spacing: 4
+
+        Text {
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Osprey"
+            font.pointSize: 16
+            color: "white"
         }
 
-        property int currentSourceId: 0;
-        property double currentAcquisitionRate: 0;
-
-        onSignalSourceChanged: {
-            currentSourceId = sourceNameToId(source);
-            currentAcquisitionRate=acquisitionRate;
-            dataSource.changeAcquisitionRate(currentAcquisitionRate);
-            dataSource.generateData(currentSourceId, 6, sampleCount );
-            scopeView.axisX().max = sampleCount;
+        StartStopButton{
+            height:parent.height
+            width: 40
         }
-        onSeriesTypeChanged: scopeView.changeSeriesType(type);
-        onRefreshRateChanged: scopeView.changeRefreshRate(rate);
-        onAntialiasingEnabled: scopeView.antialiasing = enabled;
-        onOpenGlChanged: {
-            scopeView.openGL = enabled;
+
+        ControlPanel {
+            id: controlPanel
+            anchors.verticalCenter: parent.verticalCenter
+    //![1]
+            function sourceNameToId(source){
+                if (source == "sine")return 0;
+                else if (source == "square")return 1;
+                else if (source == "pulse")return 2;
+                else
+                    return 3;
+            }
+
+            property int currentSourceId: 0;
+            property double currentAcquisitionRate: 0;
+
+            onSignalSourceChanged: {
+                currentSourceId = sourceNameToId(source);
+                currentAcquisitionRate=acquisitionRate;
+                dataSource.changeAcquisitionRate(currentAcquisitionRate);
+                dataSource.generateData(currentSourceId, 6, sampleCount );
+                scopeView.axisX().max = sampleCount;
+            }
+            onSeriesTypeChanged: scopeView.changeSeriesType(type);
+            onRefreshRateChanged: scopeView.changeRefreshRate(rate);
+            onAntialiasingEnabled: scopeView.antialiasing = enabled;
+            onOpenGlChanged: {
+                scopeView.openGL = enabled;
+            }
         }
     }
 
