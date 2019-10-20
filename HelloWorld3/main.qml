@@ -28,9 +28,19 @@ Window {
              }
         }
 
-        Text {
-            text: "Quit"
+        Column{
             anchors.centerIn: parent
+            Text {
+                anchors.horizontalCenter: parent.Center
+                font.italic: true
+                font.pointSize: 8
+                text: "Label"
+            }
+            Text {
+                anchors.horizontalCenter: parent.Center
+                font.pointSize: 12
+                text: "Value"
+            }
         }
         MouseArea {
             anchors.fill: parent
