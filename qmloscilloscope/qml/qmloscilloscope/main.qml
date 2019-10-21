@@ -51,7 +51,7 @@ Item {
         }
 
         StartStopButton{
-            height:parent.height
+            //height:parent.height
             width: 40
         }
 
@@ -60,9 +60,9 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
     //![1]
             function sourceNameToId(source){
-                if (source == "sine")return 0;
-                else if (source == "square")return 1;
-                else if (source == "pulse")return 2;
+                if (source === "sine")return 0;
+                else if (source === "square")return 1;
+                else if (source === "pulse")return 2;
                 else
                     return 3;
             }
