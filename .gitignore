@@ -3,22 +3,7 @@
 
 # Project-specific files & folders
 
-MigrationBackup/
-UT_Lib.bin Debug/
-
-Extensions/*/*.dll
-Extensions/*/*.dll
-
-# "LabMax Pro SSIM Updater/"
-# "LabMax Pro SSIM Updater/*"
-# "LabMaxPro12_CodedUITest/"
-# "LabMaxPro12_CodedUITest/*"
-"Bug 1710/*"
-Documenter/Html/*
-ExampleApp/Distribution/*
-ExampleApp/LabMax-Pro_PC/
-ExampleApp/LabMax-Pro_PC/*
-ExampleApp/*.zip
+build-*/
 
 # User-specific files
 *.suo
@@ -196,7 +181,7 @@ PublishScripts/
 # format (NuGet v4 and .NET Core).
 project.lock.json
 project.assets.json
-# End NuGet Packages 
+# End NuGet Packages
 
 # Microsoft Azure Build Output
 csx/
