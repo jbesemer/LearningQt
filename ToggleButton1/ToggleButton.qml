@@ -2,8 +2,8 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0
 
 Rectangle {
-    width:isOn ? imagePause.width : imagePlay.width
-    height:isOn ? imagePause.height : imagePlay.height
+    //width:image.width
+    //height:image.height
 
     state: "off"
 
@@ -18,16 +18,11 @@ Rectangle {
     function toggle(){ set(!isOn()) }
 
     Image {
-      id:imagePause
+      id:image
       anchors.fill: parent;
-      source:"images/action_pause.png"
-      opacity: isOff()? 0: 1
-    }
-    Image {
-      id:imagePlay
-      anchors.fill: parent;
-      source:"images/action_play.png"
-      opacity: isOff()? 1: 0
+      source: isOff()
+              ? "images/action_play.png"
+              : "images/action_pause.png"
     }
 
     MouseArea{
