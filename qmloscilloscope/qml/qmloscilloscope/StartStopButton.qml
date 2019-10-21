@@ -13,12 +13,12 @@ Rectangle {
 
     Image {
       anchors.fill: parent;
-      source: "..\Images/action_pause.png";
+      source:"images/action_pause.png"
       opacity: state=="off"? 0: 1
     }
     Image {
       anchors.fill: parent;
-      source: "..\Images/action_play.png";
+      source:"images/action_play.png"
       opacity: state=="off"? 1: 0
     }
 

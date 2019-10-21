@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>images/action_pause.png</file>
+        <file>images/action_play.png</file>
+        <file>ToggleButton.qml</file>
+    </qresource>
+</RCC>
