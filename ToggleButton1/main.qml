@@ -25,6 +25,14 @@ Window {
         ToggleButton{
             width:32; height: 32
             id: startStop
+            onChanged: {
+                text.text = isOn?"On":"Off"
+            }
+        }
+
+        Text{
+            id:text
+            text:"Unk"
         }
 
         Button{

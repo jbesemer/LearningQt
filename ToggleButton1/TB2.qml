@@ -2,27 +2,22 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0
 
 Rectangle {
-    id:toggleButton
     //width:image.width
     //height:image.height
 
     signal clicked(int isOn)
-    signal changed(int isOn)
 
     state: "off"
-    onStateChanged: changed(isOn())
 
     function isOn(){ return state!="off" }
     function isOff(){ return state=="off" }
     function setOn(){ state="on"; return true }
     function setOff(){ state="off"; return false }
     function set(isOn){
-        if(isOn) setOn()
-        else    setOff()
+        if(isOn) setOn();
+        else    setOff();
     }
-    function toggle(){
-        set(!isOn())
-    }
+    function toggle(){ set(!isOn()) }
 
     Image {
       id:image
@@ -35,12 +30,6 @@ Rectangle {
     MouseArea{
         id:region
         anchors.fill:parent
-        onClicked: {
-            toggle()
-            toggleButton.clicked(isOn())
-        }
-        onPressed: {}
-        onPressAndHold: {}
-        onReleased: {}
+        onReleased: {toggle();clicked(isOn())}
     }
 }
