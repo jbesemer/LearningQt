@@ -37,14 +37,13 @@ Item {
     height: 400
 
     RowLayout{
+        id:topRow
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.leftMargin: 4
         spacing: 4
 
         Text {
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
             text: "Osprey"
             font.pointSize: 16
             color: "white"
@@ -52,12 +51,11 @@ Item {
 
         StartStopButton{
             //height:parent.height
-            width: 40
+            //width: 40
         }
 
         ControlPanel {
             id: controlPanel
-            anchors.verticalCenter: parent.verticalCenter
     //![1]
             function sourceNameToId(source){
                 if (source === "sine")return 0;
@@ -89,11 +87,11 @@ Item {
 //![2]
     ScopeView {
         id: scopeView
-        anchors.top: controlPanel.bottom
+        anchors.top: topRow.bottom
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
-        height: main.height-controlPanel.height
+        height: main.height-topRow.height
 
         onOpenGLSupportedChanged: {
             if (!openGLSupported) {

@@ -43,4 +43,7 @@ Rectangle {
         onPressAndHold: {}
         onReleased: {}
     }
+    Component.onCompleted: {
+
+    }
 }
