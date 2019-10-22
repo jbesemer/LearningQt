@@ -38,6 +38,10 @@ ChartView {
     legend.visible: false
     property bool openGL: true
     property bool openGLSupported: true
+    property bool isRunning:false
+    onIsRunningChanged: {
+        refreshTimer.running=isRunning
+    }
     onOpenGLChanged: {
         if (openGLSupported) {
             series("signal 1").useOpenGL = openGL;
@@ -89,7 +93,7 @@ ChartView {
     Timer {
         id: refreshTimer
         interval: 1 / 60 * 1000 // 60 Hz
-        running: true
+        running: false
         repeat: true
         onTriggered: {
             dataSource.update(chartView.series(0));

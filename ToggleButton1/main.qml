@@ -19,8 +19,9 @@ Window {
             width:32; height: 32
             id: startStop
             onChanged: {
-                text.text = isOn?"On":"Off"
+                text.text = running?"On":"Off"
             }
+            enabled:isEnabled
         }
 
         Text{
@@ -29,16 +30,26 @@ Window {
         }
 
         Button{
-            text: "Turn On"
+            text: "Start"
             onClicked: {
-                startStop.setOn()
+                startStop.setRunning(1)
+            }
+        }
+        Button{
+            text: "Stop"
+            onClicked: {
+                startStop.setRunning(0)
+            }
+        }
+        Button{
+            text: "Enabled"
+            onClicked: {
                 isEnabled=1
             }
         }
         Button{
-            text: "Turn Off"
+            text: "Disabled"
             onClicked: {
-                startStop.setOff()
                 isEnabled=0
             }
         }

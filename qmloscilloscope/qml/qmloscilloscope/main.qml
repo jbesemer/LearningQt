@@ -52,6 +52,7 @@ Item {
         StartStopButton{
             //height:parent.height
             //width: 40
+            onChanged: scopeView.isRunning=running
         }
 
         ControlPanel {

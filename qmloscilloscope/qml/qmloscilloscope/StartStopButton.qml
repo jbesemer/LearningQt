@@ -6,44 +6,44 @@ Rectangle {
     width:40
     height:40
 
-    signal clicked(int isOn)
-    signal changed(int isOn)
+    signal clicked(bool isRunning)
+    signal changed(bool isRunning)
 
-    state: "off"
-    onStateChanged: changed(isOn())
+    property bool running:false
+    onRunningChanged:changed(running)
+    property bool enabled:true
+    onEnabledChanged: console.log("enabled: ", enabled)
 
-    function isOn(){ return state!="off" }
-    function isOff(){ return state=="off" }
-    function setOn(){ state="on"; return true }
-    function setOff(){ state="off"; return false }
-    function set(isOn){
-        if(isOn) setOn()
-        else    setOff()
+    function isRunning(){ return running }
+    function isPaused(){ return !running }
+    function setRunning(isRunning){
+        running=isRunning
+        changed(running)
     }
     function toggle(){
-        set(!isOn())
+        setRunning(!running)
     }
 
     Image {
       id:image
       anchors.fill: parent;
-      source: isOff()
-              ? "images/action_play.png"
-              : "images/action_pause.png"
+      source: running
+              ? "images/action_pause.png"
+              : "images/action_play.png"
+      opacity: enabled ? 1.0 : 0.1
     }
 
     MouseArea{
         id:region
         anchors.fill:parent
         onClicked: {
-            toggle()
-            toggleButton.clicked(isOn())
+            if(enabled){
+                toggle()
+                toggleButton.clicked(running)
+            }
         }
         onPressed: {}
         onPressAndHold: {}
         onReleased: {}
-    }
-    Component.onCompleted: {
-
     }
 }
