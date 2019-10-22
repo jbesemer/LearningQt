@@ -24,6 +24,42 @@ Window {
             enabled:isEnabled
         }
 
+        ColumnLayout{
+            Text{
+                text:"Samples"
+                font.pointSize: 6
+            }
+
+            ComboBox {
+                id: sampleCountButton
+                height:20;width:30
+                padding: 2
+
+                property variant currentValue: model.get(currentIndex).value
+                signal signalSourceChanged(variant selection)
+
+
+                //text: "Samples: "
+                textRole:"key"
+                model: ListModel{
+                   ListElement {key: "1K"; value: 1024 }
+                   ListElement {key: "3K"; value: 3000 }
+                   ListElement {key: "10K"; value: 10000 }
+                   ListElement {key: "30K"; value: 30000}
+                }
+
+                onActivated: {
+                    currentValue = model.get(index).value
+                    console.log("Activated: ", index, currentValue);
+                    signalSourceChanged(currentValue)
+                }
+
+                onSignalSourceChanged: {
+                    console.log("Changed:", selection)
+                }
+            }
+        }
+
         Text{
             id:text
             text:"Unk"

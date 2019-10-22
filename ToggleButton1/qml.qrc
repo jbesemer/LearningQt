@@ -13,5 +13,6 @@
         <file>images/delete_button_error.png</file>
         <file>images/help.png</file>
         <file>images/info.png</file>
+        <file>ComboButton.qml</file>
     </qresource>
 </RCC>
