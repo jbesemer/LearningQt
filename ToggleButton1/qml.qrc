@@ -14,5 +14,7 @@
         <file>images/help.png</file>
         <file>images/info.png</file>
         <file>ComboButton.qml</file>
+        <file>SquareButton.qml</file>
+        <file>images/download.png</file>
     </qresource>
 </RCC>

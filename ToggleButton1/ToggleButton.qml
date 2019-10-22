@@ -11,8 +11,9 @@ Rectangle {
 
     property int running:0
     onRunningChanged:changed(running)
-    property int enabled:1
     onEnabledChanged: console.log("enabled: ", enabled)
+
+    property alias image: image
 
     function isRunning(){ return running }
     function isPaused(){ return !running }
@@ -30,7 +31,7 @@ Rectangle {
       source: running
               ? "images/action_pause.png"
               : "images/action_play.png"
-      opacity: enabled ? 1.0 : 0.1
+      opacity: enabled ? 1.0 : 0.5
     }
 
     MouseArea{

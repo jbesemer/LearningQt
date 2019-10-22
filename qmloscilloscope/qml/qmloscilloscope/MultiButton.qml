@@ -39,8 +39,6 @@ Item {
     property int currentSelection: 0
     signal selectionChanged(variant selection)
 
-    //signal clicked
-
     implicitWidth: buttonText.implicitWidth + 5
     implicitHeight: buttonText.implicitHeight + 10
 

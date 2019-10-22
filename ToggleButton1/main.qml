@@ -12,16 +12,50 @@ Window {
     property int isEnabled: 1
 
     RowLayout{
+        id:toolbar
         anchors.topMargin: 0
         anchors.leftMargin: 0
 
         ToggleButton{
-            width:32; height: 32
             id: startStop
+            width:32; height: 32
             onChanged: {
                 text.text = running?"On":"Off"
+                zeroingButton.enabled = !running
             }
             enabled:isEnabled
+        }   
+
+        ToggleButton{
+            id: zeroingButton
+            width:32; height: 32
+            image.source:"images/download.png"
+
+            onClicked:{
+                toolbar.enabled=false
+                zeroingTimer.start()
+                zeroingPopup.open()
+            }
+
+            Timer {
+                id: zeroingTimer
+                property int seconds: 4
+                interval: seconds * 1000
+                running: false
+                repeat: false
+                onTriggered: {
+                    zeroingPopup.close()
+                    toolbar.enabled=true
+                }
+            }
+            Popup {
+                id:zeroingPopup
+                padding:4
+                contentItem:Text{
+                    font.pointSize: 18
+                    text:"Zeroing Meter"
+                }
+            }
         }
 
         ColumnLayout{
@@ -33,7 +67,7 @@ Window {
             ComboBox {
                 id: sampleCountButton
                 height:20;width:30
-                padding: 2
+                padding: 0
 
                 property variant currentValue: model.get(currentIndex).value
                 signal signalSourceChanged(variant selection)
