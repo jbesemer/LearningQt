@@ -3,16 +3,17 @@ import QtQuick.Controls 1.0
 
 Rectangle {
     id:toggleButton
-    width:40
-    height:40
+    width:32
+    height:32
 
     signal clicked(bool isRunning)
     signal changed(bool isRunning)
 
     property bool running:false
     onRunningChanged:changed(running)
-    property bool enabled:true
     onEnabledChanged: console.log("enabled: ", enabled)
+
+    property alias image: image
 
     function isRunning(){ return running }
     function isPaused(){ return !running }
@@ -30,7 +31,7 @@ Rectangle {
       source: running
               ? "images/action_pause.png"
               : "images/action_play.png"
-      opacity: enabled ? 1.0 : 0.1
+      opacity: enabled ? 1.0 : 0.5
     }
 
     MouseArea{

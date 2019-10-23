@@ -6,10 +6,10 @@ Rectangle {
     //width:image.width
     //height:image.height
 
-    signal clicked(int isRunning)
-    signal changed(int isRunning)
+    signal clicked(bool isRunning)
+    signal changed(bool isRunning)
 
-    property int running:0
+    property bool running:false
     onRunningChanged:changed(running)
     onEnabledChanged: console.log("enabled: ", enabled)
 

@@ -12,7 +12,7 @@ RESOURCES += \
 
 DISTFILES += \
     qml/qmloscilloscope/* \
-    qml/qmloscilloscope/StartStopButton.qml
+    qml/qmloscilloscope/ToggleButton.qml
 
 target.path = $$[QT_INSTALL_EXAMPLES]/charts/qmloscilloscope
 INSTALLS += target

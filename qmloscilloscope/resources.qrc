@@ -4,8 +4,18 @@
         <file>qml/qmloscilloscope/ControlPanel.qml</file>
         <file>qml/qmloscilloscope/ScopeView.qml</file>
         <file>qml/qmloscilloscope/MultiButton.qml</file>
-        <file>qml/qmloscilloscope/StartStopButton.qml</file>
         <file>qml/qmloscilloscope/images/action_pause.png</file>
         <file>qml/qmloscilloscope/images/action_play.png</file>
+        <file>qml/qmloscilloscope/ToggleButton.qml</file>
+        <file>qml/qmloscilloscope/images/action_goto_next.png</file>
+        <file>qml/qmloscilloscope/images/action_record.png</file>
+        <file>qml/qmloscilloscope/images/action_stop.png</file>
+        <file>qml/qmloscilloscope/images/cancel.png</file>
+        <file>qml/qmloscilloscope/images/close_window.png</file>
+        <file>qml/qmloscilloscope/images/delete.png</file>
+        <file>qml/qmloscilloscope/images/delete_button_error.png</file>
+        <file>qml/qmloscilloscope/images/download.png</file>
+        <file>qml/qmloscilloscope/images/help.png</file>
+        <file>qml/qmloscilloscope/images/info.png</file>
     </qresource>
 </RCC>
