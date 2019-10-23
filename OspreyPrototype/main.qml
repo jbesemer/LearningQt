@@ -39,21 +39,36 @@ Item {
                 width:32; height: 32
                 image.source:"images/download.png"
 
-                onClicked:{
+                function start(){
+                    errors.hide()
                     toolbar.enabled=false
                     zeroingTimer.start()
                     messages.show( "Zeroing Meter" )
                 }
 
+                function finish(){
+                    messages.hide()
+                    errors.hide()
+                    toolbar.enabled=true
+                }
+
+                onClicked:{
+                    start()
+                }
+
                 Timer {
                     id: zeroingTimer
-                    property int seconds: 4
+                    property int seconds: 2
                     interval: seconds * 1000
                     running: false
                     repeat: false
                     onTriggered: {
-                        messages.hide()
-                        toolbar.enabled=true
+                        var rand = Math.random()
+                        if( rand < 0.3){
+                            errors.show( "Zeroing error")
+                        }else{
+                            zeroingButton.finish()
+                        }
                     }
                 }
             }
@@ -91,11 +106,13 @@ Item {
         RowLayout{
             id: messages
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+
             visible: false
 
             function show( message ){
                 messages.visible=true
-                text.text=message
+                messageText.text=message
             }
 
             function hide(){
@@ -103,9 +120,46 @@ Item {
             }
 
             Text{
-                id:text
+                id:messageText
                 color:"yellow"
                 font.pointSize: 18
+            }
+        }
+
+        RowLayout{
+            id: errors
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+
+            visible: false
+
+            function show( message ){
+                errors.visible=true
+                messages.visible=false
+                errorText.text=message
+            }
+
+            function hide(){
+                errors.visible=false
+                messages.visible=false
+            }
+
+            Text{
+                id:errorText
+                color:"red"
+                font.pointSize: 18
+            }
+            Button{
+                text: "Block Sensor And Retry"
+                onClicked: {
+                    zeroingButton.start()
+                }
+            }
+            Button{
+                text: "Cancel"
+                onClicked: {
+                    zeroingButton.finish()
+                }
             }
         }
 
