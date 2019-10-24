@@ -14,28 +14,28 @@ Window {
         orientation: Qt.Horizontal
 
         Rectangle {
-            width: 200
-            Layout.maximumWidth: 400
+            implicitWidth: 200
+            SplitView.maximumWidth: 400
             color: "lightblue"
-            Text {
+            Label {
                 text: "View 1"
                 anchors.centerIn: parent
             }
         }
         Rectangle {
             id: centerItem
-            Layout.minimumWidth: 50
-            Layout.fillWidth: true
+            SplitView.minimumWidth: 50
+            SplitView.fillWidth: true
             color: "lightgray"
-            Text {
+            Label {
                 text: "View 2"
                 anchors.centerIn: parent
             }
         }
         Rectangle {
-            width: 200
+            implicitWidth: 200
             color: "lightgreen"
-            Text {
+            Label {
                 text: "View 3"
                 anchors.centerIn: parent
             }

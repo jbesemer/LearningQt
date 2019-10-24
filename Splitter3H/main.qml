@@ -9,12 +9,6 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
-    // 1. None of initial or Layout.minimum settings obeyed at startup
-    //      layout has 2 handles squished all the way left and one huge View 3.
-    //      user needs to manually reveal the hidden panels.
-    //      Presumably, saving and restoring layout will remedy this.
-    // 2. Layout.minimum and .maximum are not enforced during user interaction.
-    //      handles can be freely moved to any position.
     // 3. when handles are very close, items in the collapsed region
     //      overflow into adjacant region. Would prefer to have this cause
     //      collapsed region to be hidden.
