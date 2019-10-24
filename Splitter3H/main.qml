@@ -16,6 +16,7 @@ Window {
 
         Rectangle {
             width: 200
+            Layout.minimumWidth: 50
             Layout.maximumWidth: 400
             color: "lightblue"
             Text {
@@ -34,6 +35,7 @@ Window {
             }
         }
         Rectangle {
+            Layout.minimumWidth: 50
             width: 200
             color: "lightgreen"
             Text {
