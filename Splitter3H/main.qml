@@ -7,7 +7,7 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Splitter3H")
 
     // 3. when handles are very close, items in the collapsed region
     //      overflow into adjacant region. Would prefer to have this cause

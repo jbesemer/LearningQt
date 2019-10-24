@@ -7,37 +7,67 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Splitter3HV")
 
     SplitView {
         anchors.fill: parent
         orientation: Qt.Horizontal
 
-        Rectangle {
-            implicitWidth: 200
-            SplitView.maximumWidth: 400
-            color: "lightblue"
-            Label {
-                text: "View 1"
-                anchors.centerIn: parent
-            }
-        }
-        Rectangle {
-            id: centerItem
-            SplitView.minimumWidth: 50
+        SplitView {
+            orientation: Qt.Vertical
             SplitView.fillWidth: true
-            color: "lightgray"
-            Label {
-                text: "View 2"
-                anchors.centerIn: parent
+            //SplitView.minimumWidth: 50
+
+            Rectangle {
+                id:upperLeft
+                color: "lightblue"
+                implicitHeight: 50
+                Label {
+                    text: "View 1"
+                    anchors.centerIn: parent
+                }
+
+                MouseArea{
+                    anchors.fill:parent
+                    onClicked: {
+                        console.log( "Clicked upperLeft" )
+                    }
+                }
+            }
+            Rectangle {
+                id: lowerLeft
+                SplitView.fillHeight: true
+                color: "lightgray"
+                Label {
+                    text: "View 2"
+                    anchors.centerIn: parent
+                }
+                onHeightChanged: console.log("heightChanging")
+
+                MouseArea{
+                    anchors.fill:parent
+                    onClicked: {
+                        console.log( "Clicked lowerLeft" )
+                    }
+                }
             }
         }
+
         Rectangle {
+            id:rightPanel
+            SplitView.minimumWidth: 50
             implicitWidth: 200
             color: "lightgreen"
             Label {
                 text: "View 3"
                 anchors.centerIn: parent
+            }
+
+            MouseArea{
+                anchors.fill:parent
+                onClicked: {
+                    console.log( "Clicked rightPanel" )
+                }
             }
         }
     }
