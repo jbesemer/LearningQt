@@ -3,8 +3,11 @@
 
 # Project-specific files & folders
 
+# QtCreator
+
 build-*/
 build-*
+*.autosave
 
 # User-specific files
 *.suo
