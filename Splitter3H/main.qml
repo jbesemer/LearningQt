@@ -1,7 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-import QtQuick.Layouts 1.3
 
 Window {
     id: window
@@ -26,11 +25,10 @@ Window {
         orientation: Qt.Horizontal
 
         Rectangle {
-            width: 200
-            SplitView.minimumWidth: 50
+            implicitWidth: 200
             SplitView.maximumWidth: 400
             color: "lightblue"
-            Text {
+            Label {
                 text: "View 1"
                 anchors.centerIn: parent
             }
@@ -40,19 +38,18 @@ Window {
             SplitView.minimumWidth: 50
             SplitView.fillWidth: true
             color: "lightgray"
-            Text {
+            Label {
                 text: "View 2"
                 anchors.centerIn: parent
             }
         }
         Rectangle {
-            SplitView.minimumWidth: 50
-            width: 200
+            implicitWidth: 200
             color: "lightgreen"
-            Text {
+            Label {
                 text: "View 3"
                 anchors.centerIn: parent
             }
         }
     }
-}
+ }
