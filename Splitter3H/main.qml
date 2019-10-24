@@ -10,14 +10,25 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    // 1. None of initial or Layout.minimum settings obeyed at startup
+    //      layout has 2 handles squished all the way left and one huge View 3.
+    //      user needs to manually reveal the hidden panels.
+    //      Presumably, saving and restoring layout will remedy this.
+    // 2. Layout.minimum and .maximum are not enforced during user interaction.
+    //      handles can be freely moved to any position.
+    // 3. when handles are very close, items in the collapsed region
+    //      overflow into adjacant region. Would prefer to have this cause
+    //      collapsed region to be hidden.
+    // 4. Can't find method to hook when handles move to implement #3.
+
     SplitView {
         anchors.fill: parent
         orientation: Qt.Horizontal
 
         Rectangle {
             width: 200
-            Layout.minimumWidth: 50
-            Layout.maximumWidth: 400
+            SplitView.minimumWidth: 50
+            SplitView.maximumWidth: 400
             color: "lightblue"
             Text {
                 text: "View 1"
@@ -26,8 +37,8 @@ Window {
         }
         Rectangle {
             id: centerItem
-            Layout.minimumWidth: 50
-            Layout.fillWidth: true
+            SplitView.minimumWidth: 50
+            SplitView.fillWidth: true
             color: "lightgray"
             Text {
                 text: "View 2"
@@ -35,7 +46,7 @@ Window {
             }
         }
         Rectangle {
-            Layout.minimumWidth: 50
+            SplitView.minimumWidth: 50
             width: 200
             color: "lightgreen"
             Text {
