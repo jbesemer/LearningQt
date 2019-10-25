@@ -14,6 +14,7 @@ Window {
     GridLayout{
         rows:3
         columns: 2
+        anchors.fill:parent
 
         ToolBar{
             Layout.row:0
