@@ -17,5 +17,6 @@
         <file>images/download.png</file>
         <file>images/help.png</file>
         <file>images/info.png</file>
+        <file>ScopeView.qml</file>
     </qresource>
 </RCC>

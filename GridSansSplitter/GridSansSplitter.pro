@@ -1,4 +1,4 @@
-QT += quick
+QT += charts qml quick
 
 CONFIG += c++11
 

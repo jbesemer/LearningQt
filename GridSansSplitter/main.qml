@@ -20,18 +20,16 @@ Window {
             Layout.row:0
             Layout.column: 0
             Layout.columnSpan: 2
-            Layout.fillHeight: true
             Layout.fillWidth: true
         }
 
         MeasurementPanel{
             Layout.row:1
             Layout.column: 0
-            Layout.fillHeight: true
             Layout.fillWidth: true
         }
 
-        GraphicsPanel{
+        ScopeView{
             Layout.row:2
             Layout.column: 0
             Layout.fillHeight: true

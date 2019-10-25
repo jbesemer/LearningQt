@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.0
 Rectangle {
     id:toolbar
     color: "grey"
+    height:40
     Label {
         text: "View 1"
         anchors.centerIn: parent
