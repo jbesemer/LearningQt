@@ -8,14 +8,14 @@ Rectangle {
     color: "grey"
     height:40
     Label {
-        text: "View 1"
+        text: "Toolbar"
         anchors.centerIn: parent
     }
 
     MouseArea{
         anchors.fill:parent
         onClicked: {
-            console.log( "Clicked upperLeft" )
+            console.log( "Clicked Toolbar" )
         }
     }
 }

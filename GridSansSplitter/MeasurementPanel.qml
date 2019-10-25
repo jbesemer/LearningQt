@@ -4,17 +4,17 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 Rectangle {
-    id:upperLeft
+    id:measurement
     color: "lightblue"
     Label {
-        text: "View 1"
+        text: "Measurement Panel"
         anchors.centerIn: parent
     }
 
     MouseArea{
         anchors.fill:parent
         onClicked: {
-            console.log( "Clicked upperLeft" )
+            console.log( "Clicked Measurement" )
         }
     }
 }

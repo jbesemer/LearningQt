@@ -18,5 +18,6 @@
         <file>images/help.png</file>
         <file>images/info.png</file>
         <file>ScopeView.qml</file>
+        <file>MainSplitter.qml</file>
     </qresource>
 </RCC>

@@ -3,11 +3,13 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
+// replaced by ScopeView
+
 Rectangle {
-    id: lowerLeft
+    id: graphics
     color: "lightgray"
     Label {
-        text: "View 2"
+        text: "Graphics Panel"
         anchors.centerIn: parent
     }
     onHeightChanged: console.log("heightChanging")
@@ -15,7 +17,7 @@ Rectangle {
     MouseArea{
         anchors.fill:parent
         onClicked: {
-            console.log( "Clicked lowerLeft" )
+            console.log( "Clicked Graphics Panel" )
         }
     }
 }

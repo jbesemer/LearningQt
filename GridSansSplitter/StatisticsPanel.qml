@@ -4,17 +4,17 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 Rectangle {
-    id:rightPanel
+    id:statistics
     color: "lightgreen"
     Label {
-        text: "View 3"
+        text: "Statistics Panel"
         anchors.centerIn: parent
     }
 
     MouseArea{
         anchors.fill:parent
         onClicked: {
-            console.log( "Clicked rightPanel" )
+            console.log( "Clicked Statistics Panel" )
         }
     }
 }

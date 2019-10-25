@@ -7,41 +7,57 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Grid Sans Splitter")
 
-    // doesn't work at all
-
-    GridLayout{
-        rows:3
-        columns: 2
+    ColumnLayout{
         anchors.fill:parent
 
         ToolBar{
-            Layout.row:0
-            Layout.column: 0
-            Layout.columnSpan: 2
             Layout.fillWidth: true
         }
 
-        MeasurementPanel{
-            Layout.row:1
-            Layout.column: 0
+        SplitView {
+            orientation: Qt.Horizontal
             Layout.fillWidth: true
-        }
-
-        ScopeView{
-            Layout.row:2
-            Layout.column: 0
             Layout.fillHeight: true
-            Layout.fillWidth: true
+
+            SplitView {
+                orientation: Qt.Vertical
+                SplitView.fillWidth: true
+
+                MeasurementPanel{
+                    //Layout.row:1
+                    //Layout.column: 0
+                    Layout.fillWidth: true
+                    height:30
+                }
+
+                ScopeView{
+                    //Layout.row:2
+                    //Layout.column: 0
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+            }
+
+            StatisticsPanel{
+                //Layout.row:1
+                //Layout.column: 1
+                //Layout.rowSpan: 2
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.minimumWidth: 100
+            }
         }
 
-        StatisticsPanel{
-            Layout.row:1
-            Layout.column: 1
-            Layout.rowSpan: 2
-            Layout.fillHeight: true
+        Rectangle{
+            id: statusBar
             Layout.fillWidth: true
+            height:20
+            Text{
+                anchors.centerIn: parent
+                text: "Status Bar: Situation Normal"
+            }
         }
     }
 }
