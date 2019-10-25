@@ -17,6 +17,7 @@ Window {
 
         Rectangle{
             Layout.row:0
+            Layout.fillWidth: true
             color:"blue"
             height: 20
             Label {
@@ -27,6 +28,7 @@ Window {
 
         Rectangle{
             Layout.row:1
+            Layout.fillWidth: true
             color:"red"
             height: 20
             visible: false
@@ -38,7 +40,8 @@ Window {
 
         MainPanels{
             Layout.row:2
-
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
     }
 }

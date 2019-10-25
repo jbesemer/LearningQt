@@ -36,7 +36,7 @@ SplitView {
                 text: "View 2"
                 anchors.centerIn: parent
             }
-            onHeightChanged: console.log("heightChanging")
+            onHeightChanged: console.log("heightChanging to ", height )
 
             MouseArea{
                 anchors.fill:parent
