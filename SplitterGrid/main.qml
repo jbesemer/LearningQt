@@ -8,6 +8,7 @@ Window {
     width: 640
     height: 480
     title: qsTr("Splitter Grid")
+    color: "black"
 
     ColumnLayout{
         anchors.fill:parent
