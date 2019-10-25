@@ -7,68 +7,36 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Splitter3HV")
+    title: qsTr("Splitter3HVG")
 
-    SplitView {
-        anchors.fill: parent
-        orientation: Qt.Horizontal
+    GridLayout {
+        anchors.fill:parent
+        rows:3
 
-        SplitView {
-            orientation: Qt.Vertical
-            SplitView.fillWidth: true
-            //SplitView.minimumWidth: 50
-
-            Rectangle {
-                id:upperLeft
-                color: "lightblue"
-                implicitHeight: 50
-                Label {
-                    text: "View 1"
-                    anchors.centerIn: parent
-                }
-
-                MouseArea{
-                    anchors.fill:parent
-                    onClicked: {
-                        console.log( "Clicked upperLeft" )
-                    }
-                }
-            }
-            Rectangle {
-                id: lowerLeft
-                SplitView.fillHeight: true
-                color: "lightgray"
-                Label {
-                    text: "View 2"
-                    anchors.centerIn: parent
-                }
-                onHeightChanged: console.log("heightChanging")
-
-                MouseArea{
-                    anchors.fill:parent
-                    onClicked: {
-                        console.log( "Clicked lowerLeft" )
-                    }
-                }
+        Rectangle{
+            Layout.row:0
+            color:"blue"
+            height: 20
+            Label {
+                text: "ToolBar"
+                anchors.centerIn: parent
             }
         }
 
-        Rectangle {
-            id:rightPanel
-            SplitView.minimumWidth: 50
-            implicitWidth: 200
-            color: "lightgreen"
+        Rectangle{
+            Layout.row:1
+            color:"red"
+            height: 20
+            visible: false
             Label {
-                text: "View 3"
+                text: "Messages"
                 anchors.centerIn: parent
             }
+        }
 
-            MouseArea{
-                anchors.fill:parent
-                onClicked: {
-                    console.log( "Clicked rightPanel" )
-                }
-            }
+        MainPanels{
+            Layout.row:2
+
         }
     }
 }
