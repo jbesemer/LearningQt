@@ -9,6 +9,8 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    // doesn't work at all
+
     GridLayout{
         rows:3
         columns: 2
