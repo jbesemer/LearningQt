@@ -9,6 +9,8 @@ Window {
     height: 480
     title: qsTr("Splitter3HVG")
 
+    // nesting breaks layout: https://bugreports.qt.io/browse/QTBUG-60489
+
     GridLayout {
         anchors.fill:parent
         rows:3

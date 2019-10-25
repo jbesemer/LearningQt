@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MeasurementPanel.qml</file>
+        <file>GraphicsPanel.qml</file>
+        <file>StatisticsPanel.qml</file>
+        <file>ToolBar.qml</file>
+    </qresource>
+</RCC>
