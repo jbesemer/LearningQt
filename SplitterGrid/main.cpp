@@ -1,5 +1,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
+#include "datasource.h"
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +10,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    DataSource dataSource( nullptr );
+    engine.rootContext()->setContextProperty("datasource", &dataSource);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     engine.load(url);
 

@@ -11,43 +11,64 @@ Window {
     color: "black"
 
     ColumnLayout{
+        id:main
         anchors.fill:parent
+        onHeightChanged: console.log("Main height: ", height )
+        onWidthChanged: console.log("Main width: ", width)
 
         ToolBar{
+            id:toolbar
             Layout.fillWidth: true
+            onWidthChanged: console.log("toolbar width: ", width)
         }
 
         SplitView {
+            id: hSplit
             orientation: Qt.Horizontal
             Layout.fillWidth: true
             Layout.fillHeight: true
+            onHeightChanged: console.log("hSplit height: ", height )
+            onWidthChanged: console.log("hSplit width: ", width)
 
             SplitView {
+                id:vSplit
                 orientation: Qt.Vertical
-                SplitView.fillWidth: true
+                Layout.preferredWidth: 420
+                //SplitView.fillWidth: true
+                onHeightChanged: console.log("vSplit height: ", height )
+                onWidthChanged: console.log("vSplit width: ", width)
 
                 MeasurementPanel{
+                    id:measurement
                     //Layout.row:1
                     //Layout.column: 0
                     Layout.fillWidth: true
-                    height:30
+                    Layout.preferredHeight: 30
+                    onHeightChanged: console.log("measure height: ", height )
+                    onWidthChanged: console.log("measure width: ", width)
                 }
 
                 ScopeView{
+                    id:scopeView
                     //Layout.row:2
                     //Layout.column: 0
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    onHeightChanged: console.log("scope height: ", height )
+                    onWidthChanged: console.log("scope width: ", width)
                 }
             }
 
             StatisticsPanel{
+                id:statistics
                 //Layout.row:1
                 //Layout.column: 1
                 //Layout.rowSpan: 2
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.minimumWidth: 100
+                Layout.preferredWidth: 220
+                onHeightChanged: console.log("stats height: ", height )
+                onWidthChanged: console.log("statis width: ", width)
             }
         }
 
