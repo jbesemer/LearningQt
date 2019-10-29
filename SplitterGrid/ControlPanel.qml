@@ -46,7 +46,7 @@ RowLayout {
 
     MultiButton {
         id: signalSourceButton
-        text: "Source: "
+        text: "Source"
         items: ["sine", "square", "pulse"]
         currentSelection: 0
         onSelectionChanged: signalSourceChanged(
@@ -58,7 +58,7 @@ RowLayout {
 
     MultiButton {
         id: sampleCountButton
-        text: "Samples: "
+        text: "Samples"
         items: ["1024", "3000", "10000", "30000"]
         currentSelection: 0
         onSelectionChanged: signalSourceChanged(
@@ -70,7 +70,7 @@ RowLayout {
 
     MultiButton {
         id: acquisitionRateButton
-        text: "Acquisition rate: "
+        text: "Acq Speed"
         items: ["10", "30", "100", "300"] //, "500", "1200"]
         currentSelection: 2
         onSelectionChanged: signalSourceChanged(
@@ -81,7 +81,7 @@ RowLayout {
     }
 
     MultiButton {
-        text: "Refresh rate: "
+        text: "Refresh rate"
         items: ["1", "24", "60", "100"]
         currentSelection: 2
         onSelectionChanged: refreshRateChanged(items[currentSelection]);
@@ -89,14 +89,14 @@ RowLayout {
 
     MultiButton {
         id: openGLButton
-        text: "OpenGL: "
+        text: "OpenGL"
         items: ["false", "true"]
         currentSelection: 1
         onSelectionChanged: openGlChanged(currentSelection == 1);
     }
 
     MultiButton {
-        text: "Graph: "
+        text: "Graph"
         items: ["line", "scatter"]
         currentSelection: 0
         onSelectionChanged: seriesTypeChanged(items[currentSelection]);
@@ -104,7 +104,7 @@ RowLayout {
 
     MultiButton {
         id: antialiasButton
-        text: "Antialias: "
+        text: "Antialias"
         items: ["OFF", "ON"]
         enabled: true
         currentSelection: 0
