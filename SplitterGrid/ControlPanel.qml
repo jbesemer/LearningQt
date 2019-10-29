@@ -46,7 +46,6 @@ SwipeView {
 
     readonly property int defaultSignalCount: 5;
 
-    Layout.fillWidth: true
     currentIndex:1
 
 

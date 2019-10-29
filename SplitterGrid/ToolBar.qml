@@ -70,7 +70,8 @@ ColumnLayout{
 
         ControlPanel {
             id: controlPanel
-    //![1]
+            Layout.fillWidth: true
+
             function sourceNameToId(source){
                 if (source === "sine")return 0;
                 else if (source === "square")return 1;
