@@ -47,6 +47,8 @@ Window {
 
         // TODO: consolidate messages and errors, with more elaborate
         // calling methods for changing colors, buttons text and actions.
+        // better yet: functionality should be in C++ with arms-distance
+        // signals and method calls interface.
         RowLayout{
             id: errors
             visible: false
