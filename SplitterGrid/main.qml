@@ -4,6 +4,7 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 Window {
+    id:window
     visible: true
     width: 640
     height: 480
@@ -13,8 +14,8 @@ Window {
     ColumnLayout{
         id:main
         anchors.fill:parent
-        onHeightChanged: console.log("Main height: ", height )
-        onWidthChanged: console.log("Main width: ", width)
+        onHeightChanged: console.log("Main height: ", main.height )
+        onWidthChanged: console.log("Main width: ", main.width)
 
         ToolBar{
             id:toolbar
@@ -33,7 +34,7 @@ Window {
                 id:vSplit
                 orientation: Qt.Vertical
                 Layout.preferredWidth: 420
-                //SplitView.fillWidth: true
+                SplitView.fillWidth: true
                 onHeightChanged: console.log("vSplit height: ", height )
                 onWidthChanged: console.log("vSplit width: ", width)
 
@@ -51,8 +52,8 @@ Window {
                     id:scopeView
                     //Layout.row:2
                     //Layout.column: 0
-                    Layout.fillHeight: true
                     Layout.fillWidth: true
+                    Layout.fillHeight: true
                     onHeightChanged: console.log("scope height: ", height )
                     onWidthChanged: console.log("scope width: ", width)
                 }
@@ -64,8 +65,8 @@ Window {
                 //Layout.column: 1
                 //Layout.rowSpan: 2
                 Layout.fillHeight: true
-                Layout.fillWidth: true
-                //Layout.preferredWidth: 220
+                //Layout.fillWidth: true
+                Layout.preferredWidth: 220
                 onHeightChanged: console.log("stats height: ", height )
                 onWidthChanged: console.log("stats width: ", width)
             }

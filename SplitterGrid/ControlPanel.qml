@@ -27,13 +27,15 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.13
+import QtQuick.Window 2.13
+import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
-RowLayout {
+SwipeView {
+    id:swipeView
     property alias openGLButton: openGLButton
     property alias antialiasButton: antialiasButton
-    Layout.fillWidth: true
     signal animationsEnabled(bool enabled)
     signal seriesTypeChanged(string type)
     signal acquisitionRateChanged(variant rate);
@@ -43,6 +45,13 @@ RowLayout {
     signal openGlChanged(bool enabled)
 
     readonly property int defaultSignalCount: 5;
+
+    Layout.fillWidth: true
+    currentIndex:1
+
+
+    RowLayout{
+        id:firstPage
 
     MultiButton {
         id: signalSourceButton
@@ -87,6 +96,10 @@ RowLayout {
         onSelectionChanged: refreshRateChanged(items[currentSelection]);
     }
 
+    }
+    RowLayout{
+        id:secondPage
+
     MultiButton {
         id: openGLButton
         text: "OpenGL: "
@@ -109,5 +122,14 @@ RowLayout {
         enabled: true
         currentSelection: 0
         onSelectionChanged: antialiasingEnabled(currentSelection == 1);
+    }
+    }
+
+    PageIndicator{
+        id:indicator
+        count:swipeView.Count
+        currentIndex: swipeView.currentIndex
+        anchors.bottom: view.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }
