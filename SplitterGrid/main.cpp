@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     DataSource dataSource( nullptr );
-    engine.rootContext()->setContextProperty("datasource", &dataSource);
+    engine.rootContext()->setContextProperty("dataSource", &dataSource);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     engine.load(url);
