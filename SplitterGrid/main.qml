@@ -4,6 +4,7 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 Window {
+    id:window
     visible: true
     width: 640
     height: 480
@@ -17,8 +18,71 @@ Window {
         onWidthChanged: console.log("Main width: ", width)
 
         ToolBar{
-            id:toolbar
+            id:toolBar
+            width:window.width
             onWidthChanged: console.log("toolbar width: ", width)
+        }
+
+        RowLayout{
+            id: messages
+            visible: false
+            width:window.width
+            Layout.alignment: Qt.AlignHCenter
+
+            function show( message ){
+                messages.visible=true
+                messageText.text=message
+            }
+
+            function hide(){
+                messages.visible=false
+            }
+
+            Text{
+                id:messageText
+                color:"yellow"
+                font.pointSize: 18
+            }
+        }
+
+        // TODO: consolidate messages and errors, with more elaborate
+        // calling methods for changing colors, buttons text and actions.
+        RowLayout{
+            id: errors
+            visible: false
+            width:window.width
+
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+
+            function show( message ){
+                errors.visible=true
+                messages.visible=false
+                errorText.text=message
+            }
+
+            function hide(){
+                errors.visible=false
+                messages.visible=false
+            }
+
+            Text{
+                id:errorText
+                color:"red"
+                font.pointSize: 18
+            }
+            Button{
+                text: "Block Sensor And Retry"
+                onClicked: {
+                    toolBar.startZeroing()
+                }
+            }
+            Button{
+                text: "Cancel"
+                onClicked: {
+                    toolBar.finishZeroing()
+                }
+            }
         }
 
         SplitView {

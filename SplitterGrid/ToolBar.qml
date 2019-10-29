@@ -4,13 +4,31 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 ColumnLayout{
-    id:controlsAndMessages
+    id:controls
     height:40
 
     property int isEnabled: 1
 
+    function startZeroing(){
+        errors.hide()
+        controls.enabled=false
+        zeroingTimer.start()
+        messages.show( "Zeroing Meter" )
+    }
+
+    function finishZeroing(){
+        var rand = Math.random()
+        if( rand < 0.3){
+            errors.show( "Zeroing error")
+        }else{
+            messages.hide()
+            errors.hide()
+            controls.enabled=true
+        }
+    }
+
     RowLayout{
-        id:toolbar
+        id:buttons
         Layout.fillWidth: true
         spacing: 4
 
@@ -34,21 +52,8 @@ ColumnLayout{
             width:32; height: 32
             image.source:"images/download.png"
 
-            function start(){
-                errors.hide()
-                toolbar.enabled=false
-                zeroingTimer.start()
-                messages.show( "Zeroing Meter" )
-            }
-
-            function finish(){
-                messages.hide()
-                errors.hide()
-                toolbar.enabled=true
-            }
-
             onClicked:{
-                start()
+                startZeroing()
             }
 
             Timer {
@@ -57,14 +62,7 @@ ColumnLayout{
                 interval: seconds * 1000
                 running: false
                 repeat: false
-                onTriggered: {
-                    var rand = Math.random()
-                    if( rand < 0.3){
-                        errors.show( "Zeroing error")
-                    }else{
-                        zeroingButton.finish()
-                    }
-                }
+                onTriggered: finishZeroing()
             }
         }
 
@@ -94,66 +92,6 @@ ColumnLayout{
             onAntialiasingEnabled: scopeView.antialiasing = enabled;
             onOpenGlChanged: {
                 scopeView.openGL = enabled;
-            }
-        }
-    }
-
-    RowLayout{
-        id: messages
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignHCenter
-
-        visible: false
-
-        function show( message ){
-            messages.visible=true
-            messageText.text=message
-        }
-
-        function hide(){
-            messages.visible=false
-        }
-
-        Text{
-            id:messageText
-            color:"yellow"
-            font.pointSize: 18
-        }
-    }
-
-    RowLayout{
-        id: errors
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignHCenter
-
-        visible: false
-
-        function show( message ){
-            errors.visible=true
-            messages.visible=false
-            errorText.text=message
-        }
-
-        function hide(){
-            errors.visible=false
-            messages.visible=false
-        }
-
-        Text{
-            id:errorText
-            color:"red"
-            font.pointSize: 18
-        }
-        Button{
-            text: "Block Sensor And Retry"
-            onClicked: {
-                zeroingButton.start()
-            }
-        }
-        Button{
-            text: "Cancel"
-            onClicked: {
-                zeroingButton.finish()
             }
         }
     }
