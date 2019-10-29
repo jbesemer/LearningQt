@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.0
 
 ColumnLayout{
     id:controlsAndMessages
-    anchors.fill:parent
     height:40
 
     property int isEnabled: 1

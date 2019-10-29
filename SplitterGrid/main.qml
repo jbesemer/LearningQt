@@ -18,7 +18,6 @@ Window {
 
         ToolBar{
             id:toolbar
-            Layout.fillWidth: true
             onWidthChanged: console.log("toolbar width: ", width)
         }
 
@@ -66,9 +65,9 @@ Window {
                 //Layout.rowSpan: 2
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.preferredWidth: 220
+                //Layout.preferredWidth: 220
                 onHeightChanged: console.log("stats height: ", height )
-                onWidthChanged: console.log("statis width: ", width)
+                onWidthChanged: console.log("stats width: ", width)
             }
         }
 
