@@ -53,8 +53,6 @@ Window {
             id: errors
             visible: false
             width:window.width
-
-            Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
 
             function show( message ){
