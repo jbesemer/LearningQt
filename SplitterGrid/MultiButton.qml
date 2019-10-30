@@ -71,7 +71,7 @@ Item {
                         text: button.items[currentSelection]
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                        font.pointSize: 14
+                        font.pointSize: 12
                         //verticalAlignment: Text.AlignVCenter
                         //horizontalAlignment: Text.AlignHCenter
                     }

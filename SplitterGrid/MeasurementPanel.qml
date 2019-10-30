@@ -7,8 +7,11 @@ Rectangle {
     id:measurement
     color: "lightblue"
     Label {
-        text: "Measurement Panel"
-        anchors.centerIn: parent
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignRight
+
+        text:"3.254 mW"
+        font.pixelSize: measurement.height*0.9
     }
 
     MouseArea{

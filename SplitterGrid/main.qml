@@ -19,14 +19,14 @@ Window {
 
         ToolBar{
             id:toolBar
-            width:window.width
+            implicitWidth:window.width
             onWidthChanged: console.log("toolbar width: ", width)
         }
 
         RowLayout{
             id: messages
             visible: false
-            width:window.width
+            implicitWidth:window.width
             Layout.alignment: Qt.AlignHCenter
 
             function show( message ){
@@ -38,10 +38,16 @@ Window {
                 messages.visible=false
             }
 
+            BusyIndicator{
+            }
+
             Text{
                 id:messageText
                 color:"yellow"
                 font.pointSize: 18
+            }
+
+            BusyIndicator{
             }
         }
 
@@ -52,7 +58,7 @@ Window {
         RowLayout{
             id: errors
             visible: false
-            width:window.width
+            implicitWidth:window.width
             Layout.alignment: Qt.AlignHCenter
 
             function show( message ){
@@ -90,13 +96,14 @@ Window {
             orientation: Qt.Horizontal
             Layout.fillWidth: true
             Layout.fillHeight: true
+            implicitWidth:window.width-statistics.implicitWidth
             onHeightChanged: console.log("hSplit height: ", height )
             onWidthChanged: console.log("hSplit width: ", width)
 
             SplitView {
                 id:vSplit
                 orientation: Qt.Vertical
-                Layout.preferredWidth: 420
+                implicitWidth: 420
                 //SplitView.fillWidth: true
                 onHeightChanged: console.log("vSplit height: ", height )
                 onWidthChanged: console.log("vSplit width: ", width)
@@ -106,7 +113,7 @@ Window {
                     //Layout.row:1
                     //Layout.column: 0
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 30
+                    implicitHeight: 80
                     onHeightChanged: console.log("measure height: ", height )
                     onWidthChanged: console.log("measure width: ", width)
                 }
@@ -129,6 +136,7 @@ Window {
                 //Layout.rowSpan: 2
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                implicitWidth: 100
                 //Layout.preferredWidth: 220
                 onHeightChanged: console.log("stats height: ", height )
                 onWidthChanged: console.log("stats width: ", width)
