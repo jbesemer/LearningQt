@@ -110,8 +110,6 @@ Window {
 
                 MeasurementPanel{
                     id:measurement
-                    //Layout.row:1
-                    //Layout.column: 0
                     Layout.fillWidth: true
                     implicitHeight: 80
                     onHeightChanged: console.log("measure height: ", height )
@@ -120,8 +118,6 @@ Window {
 
                 ScopeView{
                     id:scopeView
-                    //Layout.row:2
-                    //Layout.column: 0
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onHeightChanged: console.log("scope height: ", height )
@@ -131,9 +127,6 @@ Window {
 
             StatisticsPanel{
                 id:statistics
-                //Layout.row:1
-                //Layout.column: 1
-                //Layout.rowSpan: 2
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 implicitWidth: 100

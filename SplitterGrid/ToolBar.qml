@@ -32,6 +32,20 @@ ColumnLayout{
         Layout.fillWidth: true
         spacing: 4
 
+        ImageButton{
+            id:burgerButton
+            image.source: "images/burger2.png"
+            onClicked: burgerMenu.open()
+
+            Menu{
+                id:burgerMenu
+                y:burgerButton.height
+                MenuItem { text: "System Menu Item1" }
+                MenuItem { text: "System Menu Item2" }
+                MenuItem { text: "System Menu Item3" }
+            }
+        }
+
         Text {
             text: "Osprey"
             font.pointSize: 16

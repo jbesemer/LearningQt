@@ -22,5 +22,11 @@
         <file>ControlPanel.qml</file>
         <file>MultiButton.qml</file>
         <file>ToggleButton.qml</file>
+        <file>ImageButton.qml</file>
+        <file>images/action_left.png</file>
+        <file>images/action_right.png</file>
+        <file>images/gear.png</file>
+        <file>images/burger1.png</file>
+        <file>images/burger2.png</file>
     </qresource>
 </RCC>

@@ -1,33 +1,6 @@
-/****************************************************************************
-**
-** Copyright (C) 2016 The Qt Company Ltd.
-** Contact: https://www.qt.io/licensing/
-**
-** This file is part of the Qt Charts module of the Qt Toolkit.
-**
-** $QT_BEGIN_LICENSE:GPL$
-** Commercial License Usage
-** Licensees holding valid commercial Qt licenses may use this file in
-** accordance with the commercial license agreement provided with the
-** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and The Qt Company. For licensing terms
-** and conditions see https://www.qt.io/terms-conditions. For further
-** information use the contact form at https://www.qt.io/contact-us.
-**
-** GNU General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU
-** General Public License version 3 or (at your option) any later version
-** approved by the KDE Free Qt Foundation. The licenses are as published by
-** the Free Software Foundation and appearing in the file LICENSE.GPL3
-** included in the packaging of this file. Please review the following
-** information to ensure the GNU General Public License requirements will
-** be met: https://www.gnu.org/licenses/gpl-3.0.html.
-**
-** $QT_END_LICENSE$
-**
-****************************************************************************/
-
-import QtQuick 2.1
+import QtQuick 2.13
+import QtQuick.Window 2.13
+import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 RowLayout {
@@ -44,6 +17,32 @@ RowLayout {
 
     readonly property int defaultSignalCount: 5;
 
+    property int firstIndex:0
+    property int lastIndex:4
+    property int maxIndex:6
+    property int scrollingIconWidth:8
+
+    function scrollLeft(){
+        if( firstIndex > 0 ){
+            firstIndex--
+            lastIndex--
+        }
+    }
+
+    function scrollRight(){
+        if( lastIndex < maxIndex ){
+            firstIndex++
+            lastIndex++
+        }
+    }
+
+    ImageButton{
+        image.source: "images/action_left.png"
+        width:scrollingIconWidth
+        enabled: firstIndex > 0
+        onClicked:scrollLeft()
+    }
+
     MultiButton {
         id: signalSourceButton
         text: "Source"
@@ -54,6 +53,8 @@ RowLayout {
                                 defaultSignalCount,
                                 sampleCountButton.items[sampleCountButton.currentSelection],
                                 acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
+        property int index:0
+        visible: firstIndex <= index && index <=  lastIndex
     }
 
     MultiButton {
@@ -66,6 +67,8 @@ RowLayout {
                                 defaultSignalCount,
                                 selection,
                                 acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
+        property int index:1
+        visible: firstIndex <= index && index <=  lastIndex
     }
 
     MultiButton {
@@ -78,6 +81,8 @@ RowLayout {
                                 defaultSignalCount,
                                 sampleCountButton.items[sampleCountButton.currentSelection],
                                 selection);
+        property int index:2
+        visible: firstIndex <= index && index <=  lastIndex
     }
 
     MultiButton {
@@ -85,6 +90,8 @@ RowLayout {
         items: ["1", "24", "60", "100"]
         currentSelection: 2
         onSelectionChanged: refreshRateChanged(items[currentSelection]);
+        property int index:3
+        visible: firstIndex <= index && index <=  lastIndex
     }
 
     MultiButton {
@@ -93,6 +100,8 @@ RowLayout {
         items: ["false", "true"]
         currentSelection: 1
         onSelectionChanged: openGlChanged(currentSelection == 1);
+        property int index:4
+        visible: firstIndex <= index && index <=  lastIndex
     }
 
     MultiButton {
@@ -100,6 +109,8 @@ RowLayout {
         items: ["line", "scatter"]
         currentSelection: 0
         onSelectionChanged: seriesTypeChanged(items[currentSelection]);
+        property int index:5
+        visible: firstIndex <= index && index <=  lastIndex
     }
 
     MultiButton {
@@ -109,5 +120,28 @@ RowLayout {
         enabled: true
         currentSelection: 0
         onSelectionChanged: antialiasingEnabled(currentSelection == 1);
+        property int index:6
+        visible: firstIndex <= index && index <=  lastIndex
+    }
+
+    ImageButton{
+        image.source: "images/action_right.png"
+        width:scrollingIconWidth
+        enabled: lastIndex < maxIndex
+        onClicked:scrollRight()
+    }
+
+    ImageButton{
+        id:gearButton
+        image.source: "images/gear.png"
+        onClicked: gearMenu.open()
+
+        Menu{
+            id:gearMenu
+            y:gearButton.height
+            MenuItem { text: "Configuration Menu Item1" }
+            MenuItem { text: "Configuration Menu Item2" }
+            MenuItem { text: "Configuration Menu Item3" }
+        }
     }
 }
