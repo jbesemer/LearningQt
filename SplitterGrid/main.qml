@@ -130,7 +130,6 @@ Window {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 implicitWidth: 100
-                //Layout.preferredWidth: 220
                 onHeightChanged: console.log("stats height: ", height )
                 onWidthChanged: console.log("stats width: ", width)
             }

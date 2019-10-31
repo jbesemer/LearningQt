@@ -18,7 +18,7 @@ ColumnLayout{
 
     function finishZeroing(){
         var rand = Math.random()
-        if( rand < 0.3){
+        if( rand < 0.5){
             errors.show( "Zeroing error")
         }else{
             messages.hide()
@@ -42,7 +42,10 @@ ColumnLayout{
                 y:burgerButton.height
                 MenuItem { text: "System Menu Item1" }
                 MenuItem { text: "System Menu Item2" }
-                MenuItem { text: "System Menu Item3" }
+                MenuItem {
+                    text: "Power Off"
+                    onTriggered: Qt.quit()
+                }
             }
         }
 
