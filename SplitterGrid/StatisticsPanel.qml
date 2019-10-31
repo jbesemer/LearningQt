@@ -1,5 +1,8 @@
-import QtQuick 2.13
+//import QtQuick 2.13
 //import QtQuick.Controls 2.13
+import QtQuick 2.2
+import QtQuick.Controls 1.5
+import QtQml.Models 2.2
 
 Rectangle{
     id:statistics
@@ -7,10 +10,6 @@ Rectangle{
 
     TableView  {
         anchors.fill: parent
-        columns:2
-        columnSpacing: 1
-        rowSpacing: 1
-        clip:true
         model: StatsModel {}
 
         TableViewColumn{
