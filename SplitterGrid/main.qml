@@ -17,6 +17,12 @@ Window {
         onHeightChanged: console.log("Main height: ", height )
         onWidthChanged: console.log("Main width: ", width)
 
+        function setRunning(isRunning){
+            running=isRunning
+            console.log("setRunning(",isRunning,")");
+        }
+        property bool running: false
+
         ToolBar{
             id:toolBar
             implicitWidth:window.width
@@ -116,12 +122,10 @@ Window {
                     onWidthChanged: console.log("measure width: ", width)
                 }
 
-                ScopeView{
-                    id:scopeView
+                GraphicsPanel{
+                    id: graphicsPanel
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onHeightChanged: console.log("scope height: ", height )
-                    onWidthChanged: console.log("scope width: ", width)
                 }
             }
 

@@ -4,8 +4,8 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
 RowLayout {
-    property alias openGLButton: openGLButton
-    property alias antialiasButton: antialiasButton
+    //property alias openGLButton: openGLButton
+    //property alias antialiasButton: antialiasButton
     Layout.fillWidth: true
     signal animationsEnabled(bool enabled)
     signal seriesTypeChanged(string type)

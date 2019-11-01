@@ -7,8 +7,6 @@ ColumnLayout{
     id:controls
     height:40
 
-    property int isEnabled: 1
-
     function startZeroing(){
         errors.hide()
         controls.enabled=false
@@ -60,7 +58,8 @@ ColumnLayout{
             //width: 40
             onChanged: {
                 zeroingButton.enabled=!running
-                scopeView.isRunning=running
+                parent.parent.parent.setRunning(running)
+                //scopeView.isRunning=running
             }
         }
 
