@@ -9,19 +9,29 @@ Rectangle{
     color: "lightgreen"
 
     TableView  {
+        id: table
         anchors.fill: parent
         model: StatsModel {}
 
         TableViewColumn{
+            id: name
             role:"name"
             title:"Name"
-            width:40
-        }
-        TableViewColumn{
-            role:"value"
-            title:"Value"
-            width:40
+            horizontalAlignment : Text.AlignRight
+            width: 100 // parent.width / 2
         }
 
+        TableViewColumn{
+            id: value
+            role:"value"
+            title:"Value"
+            horizontalAlignment : Text.AlignLeft
+            width: 150 // parent.width / 2
+        }
+
+        onWidthChanged: {
+            name.width = width / 2
+            value.width = width / 2
+        }
     }
 }
