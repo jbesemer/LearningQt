@@ -14,6 +14,7 @@ RowLayout {
     signal signalSourceChanged(string source, int signalCount, int sampleCount, double acquisitionRate);
     signal antialiasingEnabled(bool enabled)
     signal openGlChanged(bool enabled)
+    signal opModeChanged(string opMode)
 
     readonly property int defaultSignalCount: 5;
 
@@ -44,15 +45,11 @@ RowLayout {
     }
 
     MultiButton {
-        id: signalSourceButton
-        text: "Source"
-        items: ["sine", "square", "pulse"]
+        id: operatingModeButton
+        text: "Op Mode"
+        items: ["Power", "Energy", "BTU/F'night"]
         currentSelection: 0
-        onSelectionChanged: signalSourceChanged(
-                                selection,
-                                defaultSignalCount,
-                                sampleCountButton.items[sampleCountButton.currentSelection],
-                                acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
+        onSelectionChanged: opModeChanged( selection );
         property int index:0
         visible: firstIndex <= index && index <=  lastIndex
     }
@@ -61,7 +58,7 @@ RowLayout {
         id: sampleCountButton
         text: "Samples"
         items: ["1024", "3000", "10000", "30000"]
-        currentSelection: 0
+        currentSelection: 1
         onSelectionChanged: signalSourceChanged(
                                 signalSourceButton.items[signalSourceButton.currentSelection],
                                 defaultSignalCount,
@@ -87,10 +84,24 @@ RowLayout {
 
     MultiButton {
         text: "Refresh rate"
-        items: ["1", "24", "60", "100"]
+        items: ["1", "3", "10", "30", "100", "300" ]
         currentSelection: 2
         onSelectionChanged: refreshRateChanged(items[currentSelection]);
         property int index:3
+        visible: firstIndex <= index && index <=  lastIndex
+    }
+
+    MultiButton {
+        id: signalSourceButton
+        text: "Source"
+        items: ["sine", "square", "pulse"]
+        currentSelection: 0
+        onSelectionChanged: signalSourceChanged(
+                                selection,
+                                defaultSignalCount,
+                                sampleCountButton.items[sampleCountButton.currentSelection],
+                                acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
+        property int index:4
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -100,7 +111,7 @@ RowLayout {
         items: ["false", "true"]
         currentSelection: 1
         onSelectionChanged: openGlChanged(currentSelection == 1);
-        property int index:4
+        property int index:5
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -109,7 +120,7 @@ RowLayout {
         items: ["line", "scatter"]
         currentSelection: 0
         onSelectionChanged: seriesTypeChanged(items[currentSelection]);
-        property int index:5
+        property int index:6
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -120,7 +131,7 @@ RowLayout {
         enabled: true
         currentSelection: 0
         onSelectionChanged: antialiasingEnabled(currentSelection == 1);
-        property int index:6
+        property int index:7
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -139,7 +150,28 @@ RowLayout {
         Menu{
             id:gearMenu
             y:gearButton.height
-            MenuItem { text: "Configuration Menu Item1" }
+
+            MenuItem {
+                text: "Open GL"
+                checkable: true
+                checked:true
+                onTriggered: antialiasingEnabled(checked);
+            }
+
+            MenuItem {
+                text: "Line Graph"
+                checkable: true
+                checked:true
+                onTriggered: seriesTypeChanged(checked ? "line" : "scatter")
+            }
+
+            MenuItem {
+                text: "Antialias"
+                checkable: true
+                checked:true
+                onTriggered: antialiasingEnabled(checked)
+            }
+
             MenuItem { text: "Configuration Menu Item2" }
             MenuItem { text: "Configuration Menu Item3" }
         }
