@@ -10,12 +10,14 @@ Window {
     height: 480
     title: qsTr("Splitter Grid")
     color: "black"
+    //property alias scopeView: scopeView
 
     ColumnLayout{
         id:main
         anchors.fill:parent
         onHeightChanged: console.log("Main height: ", height )
         onWidthChanged: console.log("Main width: ", width)
+        //property alias scopeView: scopeView
 
         ToolBar{
             id:toolBar
@@ -109,13 +111,14 @@ Window {
                 onWidthChanged: console.log("vSplit width: ", width)
 
                 MeasurementPanel{
-                    id:measurement
+                    //id:measurement
                     Layout.fillWidth: true
                     implicitHeight: 80
                     onHeightChanged: console.log("measure height: ", height )
                     onWidthChanged: console.log("measure width: ", width)
                 }
 
+                property alias scopeView: scopeView
                 ScopeView{
                     id:scopeView
                     Layout.fillHeight: true
