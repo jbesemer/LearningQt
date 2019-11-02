@@ -14,7 +14,7 @@ RowLayout {
     signal signalSourceChanged(string source, int signalCount, int sampleCount, double acquisitionRate);
     signal antialiasingEnabled(bool enabled)
     signal openGlChanged(bool enabled)
-    signal opModeChanged(string opMode)
+    signal opModeChanged(string opMode, bool continuous)
 
     readonly property int defaultSignalCount: 5;
 
@@ -49,22 +49,8 @@ RowLayout {
         text: "Op Mode"
         items: ["Power", "Energy", "BTU/F'night"]
         currentSelection: 0
-        onSelectionChanged: opModeChanged( selection );
+        onSelectionChanged: opModeChanged( selection, continuousButton.currentSelection );
         property int index:0
-        visible: firstIndex <= index && index <=  lastIndex
-    }
-
-    MultiButton {
-        id: sampleCountButton
-        text: "Samples"
-        items: ["1024", "3000", "10000", "30000"]
-        currentSelection: 1
-        onSelectionChanged: signalSourceChanged(
-                                signalSourceButton.items[signalSourceButton.currentSelection],
-                                defaultSignalCount,
-                                selection,
-                                acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
-        property int index:1
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -78,7 +64,31 @@ RowLayout {
                                 defaultSignalCount,
                                 sampleCountButton.items[sampleCountButton.currentSelection],
                                 selection);
+        property int index:1
+        visible: firstIndex <= index && index <=  lastIndex
+    }
+
+    MultiButton {
+        id: sampleCountButton
+        text: "Samples"
+        items: ["1024", "3000", "10000", "30000"]
+        currentSelection: 1
+        onSelectionChanged: signalSourceChanged(
+                                signalSourceButton.items[signalSourceButton.currentSelection],
+                                defaultSignalCount,
+                                selection,
+                                acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
         property int index:2
+        visible: firstIndex <= index && index <=  lastIndex
+    }
+
+    MultiButton {
+        id: continuousButton
+        text: "Continuous"
+        items: ["Continuous", "OneShot"]
+        currentSelection: 1
+        onSelectionChanged: opModeChanged( operatingModeButton.currentSelection, selection );
+        property int index:3
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -87,7 +97,7 @@ RowLayout {
         items: ["1", "3", "10", "30", "100", "300" ]
         currentSelection: 2
         onSelectionChanged: refreshRateChanged(items[currentSelection]);
-        property int index:3
+        property int index:4
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -101,7 +111,7 @@ RowLayout {
                                 defaultSignalCount,
                                 sampleCountButton.items[sampleCountButton.currentSelection],
                                 acquisitionRateButton.items[acquisitionRateButton.currentSelection]);
-        property int index:4
+        property int index:5
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -111,7 +121,7 @@ RowLayout {
         items: ["false", "true"]
         currentSelection: 1
         onSelectionChanged: openGlChanged(currentSelection == 1);
-        property int index:5
+        property int index:6
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -120,7 +130,7 @@ RowLayout {
         items: ["line", "scatter"]
         currentSelection: 0
         onSelectionChanged: seriesTypeChanged(items[currentSelection]);
-        property int index:6
+        property int index:7
         visible: firstIndex <= index && index <=  lastIndex
     }
 
@@ -131,7 +141,7 @@ RowLayout {
         enabled: true
         currentSelection: 0
         onSelectionChanged: antialiasingEnabled(currentSelection == 1);
-        property int index:7
+        property int index:8
         visible: firstIndex <= index && index <=  lastIndex
     }
 
