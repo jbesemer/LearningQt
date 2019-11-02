@@ -1,8 +1,6 @@
 import QtQuick 2.13
-//import QtQuick 2.0
 import QtCharts 2.13
 
-//![1]
 ChartView {
     id: chartView
     animationOptions: ChartView.NoAnimation
@@ -59,9 +57,7 @@ ChartView {
         axisYRight: axisY2
         useOpenGL: chartView.openGL
     }
-//![1]
 
-    //![2]
     Timer {
         id: refreshTimer
         interval: 1 / 60 * 1000 // 60 Hz
@@ -72,9 +68,7 @@ ChartView {
             //dataSource.update(chartView.series(1));
         }
     }
-    //![2]
 
-    //![3]
     function changeSeriesType(type) {
         chartView.removeAllSeries();
 
@@ -109,7 +103,6 @@ ChartView {
         return Qt.createQmlObject("import QtQuick 2.0; import QtCharts 2.0; ValueAxis { min: "
                                   + min + "; max: " + max + " }", chartView);
     }
-    //![3]
 
     function setAnimations(enabled) {
         if (enabled)
