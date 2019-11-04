@@ -1,114 +1,35 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.13
+import QtQuick.Layouts 1.0
 
-Item {
-    id: main
+Window {
+    id:window
     visible: true
     width: 640
     height: 480
-
-    property int isEnabled: 1
+    title: qsTr("Splitter Grid")
+    color: "black"
+    //property alias scopeView: scopeView
 
     ColumnLayout{
+        id:main
         anchors.fill:parent
+        onHeightChanged: console.log("Main height: ", height )
+        onWidthChanged: console.log("Main width: ", width)
+        //property alias scopeView: scopeView
 
-        RowLayout{
-            id:toolbar
-            Layout.fillWidth: true
-            spacing: 4
-
-            Text {
-                text: "Osprey"
-                font.pointSize: 16
-                color: "white"
-            }
-
-            ToggleButton{
-                //height:parent.height
-                //width: 40
-                onChanged: {
-                    zeroingButton.enabled=!running
-                    scopeView.isRunning=running
-                }
-            }
-
-            ToggleButton{
-                id: zeroingButton
-                width:32; height: 32
-                image.source:"images/download.png"
-
-                function start(){
-                    errors.hide()
-                    toolbar.enabled=false
-                    zeroingTimer.start()
-                    messages.show( "Zeroing Meter" )
-                }
-
-                function finish(){
-                    messages.hide()
-                    errors.hide()
-                    toolbar.enabled=true
-                }
-
-                onClicked:{
-                    start()
-                }
-
-                Timer {
-                    id: zeroingTimer
-                    property int seconds: 2
-                    interval: seconds * 1000
-                    running: false
-                    repeat: false
-                    onTriggered: {
-                        var rand = Math.random()
-                        if( rand < 0.3){
-                            errors.show( "Zeroing error")
-                        }else{
-                            zeroingButton.finish()
-                        }
-                    }
-                }
-            }
-
-            ControlPanel {
-                id: controlPanel
-        //![1]
-                function sourceNameToId(source){
-                    if (source === "sine")return 0;
-                    else if (source === "square")return 1;
-                    else if (source === "pulse")return 2;
-                    else
-                        return 3;
-                }
-
-                property int currentSourceId: 0;
-                property double currentAcquisitionRate: 0;
-
-                onSignalSourceChanged: {
-                    currentSourceId = sourceNameToId(source);
-                    currentAcquisitionRate=acquisitionRate;
-                    dataSource.changeAcquisitionRate(currentAcquisitionRate);
-                    dataSource.generateData(currentSourceId, 6, sampleCount );
-                    scopeView.axisX().max = sampleCount;
-                }
-                onSeriesTypeChanged: scopeView.changeSeriesType(type);
-                onRefreshRateChanged: scopeView.changeRefreshRate(rate);
-                onAntialiasingEnabled: scopeView.antialiasing = enabled;
-                onOpenGlChanged: {
-                    scopeView.openGL = enabled;
-                }
-            }
+        ToolBar{
+            id:toolBar
+            implicitWidth:window.width
+            onWidthChanged: console.log("toolbar width: ", width)
         }
 
         RowLayout{
             id: messages
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-
             visible: false
+            implicitWidth:window.width
+            Layout.alignment: Qt.AlignHCenter
 
             function show( message ){
                 messages.visible=true
@@ -119,19 +40,28 @@ Item {
                 messages.visible=false
             }
 
+            BusyIndicator{
+            }
+
             Text{
                 id:messageText
                 color:"yellow"
                 font.pointSize: 18
             }
+
+            BusyIndicator{
+            }
         }
 
+        // TODO: consolidate messages and errors, with more elaborate
+        // calling methods for changing colors, buttons text and actions.
+        // better yet: functionality should be in C++ with arms-distance
+        // signals and method calls interface.
         RowLayout{
             id: errors
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-
             visible: false
+            implicitWidth:window.width
+            Layout.alignment: Qt.AlignHCenter
 
             function show( message ){
                 errors.visible=true
@@ -152,27 +82,69 @@ Item {
             Button{
                 text: "Block Sensor And Retry"
                 onClicked: {
-                    zeroingButton.start()
+                    toolBar.startZeroing()
                 }
             }
             Button{
                 text: "Cancel"
                 onClicked: {
-                    zeroingButton.finish()
+                    toolBar.finishZeroing()
                 }
             }
         }
 
-        ScopeView {
-            id: scopeView
+        SplitView {
+            id: hSplit
+            orientation: Qt.Horizontal
             Layout.fillWidth: true
             Layout.fillHeight: true
+            implicitWidth:window.width-statistics.implicitWidth
+            onHeightChanged: console.log("hSplit height: ", height )
+            onWidthChanged: console.log("hSplit width: ", width)
 
-            onOpenGLSupportedChanged: {
-                if (!openGLSupported) {
-                    controlPanel.openGLButton.enabled = false
-                    controlPanel.openGLButton.currentSelection = 0
+            SplitView {
+                id:vSplit
+                orientation: Qt.Vertical
+                implicitWidth: 420
+                //SplitView.fillWidth: true
+                onHeightChanged: console.log("vSplit height: ", height )
+                onWidthChanged: console.log("vSplit width: ", width)
+
+                MeasurementPanel{
+                    //id:measurement
+                    Layout.fillWidth: true
+                    implicitHeight: 80
+                    onHeightChanged: console.log("measure height: ", height )
+                    onWidthChanged: console.log("measure width: ", width)
                 }
+
+                property alias scopeView: scopeView
+                ScopeView{
+                    id:scopeView
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    onHeightChanged: console.log("scope height: ", height )
+                    onWidthChanged: console.log("scope width: ", width)
+                }
+            }
+
+            StatisticsPanel{
+                id:statistics
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                implicitWidth: 100
+                onHeightChanged: console.log("stats height: ", height )
+                onWidthChanged: console.log("stats width: ", width)
+            }
+        }
+
+        Rectangle{
+            id: statusBar
+            Layout.fillWidth: true
+            height:20
+            Text{
+                anchors.centerIn: parent
+                text: "Status Bar: Situation Normal"
             }
         }
     }
