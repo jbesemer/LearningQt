@@ -5,6 +5,7 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
+// NOT USED
 SplitView {
     //anchors.fill: parent
     orientation: Qt.Horizontal

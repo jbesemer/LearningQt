@@ -47,7 +47,7 @@ RowLayout {
     MultiButton {
         id: operatingModeButton
         text: "Op Mode"
-        items: ["Power", "Energy", "BTU/F'night"]
+        items: ["Power", "Energy", "BTU/Fortnight"]
         currentSelection: 0
         onSelectionChanged: opModeChanged( selection, continuousButton.currentSelection );
         property int index:0
