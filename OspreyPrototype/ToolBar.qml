@@ -56,11 +56,13 @@ ColumnLayout{
         }
 
         ToggleButton{
+            id:runPauseButton
             //height:parent.height
             //width: 40
             onChanged: {
                 zeroingButton.enabled=!running
                 scopeView.isRunning=running
+                MeterModel.setRunning(running);
             }
         }
 
