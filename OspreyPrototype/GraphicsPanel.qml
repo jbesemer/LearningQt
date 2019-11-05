@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.13
 
 // GraphicsPanel.qml
 ColumnLayout {
+    property alias scopeView: scopeView
+
     TabBar {
         id: bar
         width: parent.width
@@ -36,6 +38,8 @@ ColumnLayout {
         id:stack
         width: parent.width
         currentIndex: bar.currentIndex
+
+        property alias scopeView: scopeView
 
         Item {
             id: trendTab

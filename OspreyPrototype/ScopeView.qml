@@ -8,10 +8,16 @@ ChartView {
     legend.visible: false
     property bool openGL: true
     property bool openGLSupported: true
-    property bool isRunning:false
-    onIsRunningChanged: {
-        refreshTimer.running=isRunning
+
+    //property bool isRunning:false
+    //onIsRunningChanged: {
+    //    refreshTimer.running=isRunning
+    //}
+
+    function updateChart(){
+        dataSource.update(chartView.series(0))
     }
+
     onOpenGLChanged: {
         if (openGLSupported) {
             series("signal 1").useOpenGL = openGL;
@@ -56,17 +62,6 @@ ChartView {
         axisX: axisX
         axisYRight: axisY2
         useOpenGL: chartView.openGL
-    }
-
-    Timer {
-        id: refreshTimer
-        interval: 1 / 60 * 1000 // 60 Hz
-        running: false
-        repeat: true
-        onTriggered: {
-            dataSource.update(chartView.series(0));
-            //dataSource.update(chartView.series(1));
-        }
     }
 
     function changeSeriesType(type) {

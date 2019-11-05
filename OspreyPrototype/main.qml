@@ -10,20 +10,23 @@ Window {
     height: 480
     title: qsTr("Splitter Grid")
     color: "black"
-    //property alias scopeView: scopeView
 
-    property MeterModel meterModel:MeterModel {
+    property alias scopeView: mainPanel.scopeView
+
+    property MeterModel meterModel: MeterModel {
         onZeroingFailed: toolBar.zeroingFailed()
         onZeroingSucceeded: toolBar.zeroingSucceeded()
+        onUpdateChart: scopeView.updateChart()
     }
 
     ColumnLayout{
-        id:main
+        id:mainPanel
         anchors.fill:parent
         onHeightChanged: console.log("Main height: ", height )
         onWidthChanged: console.log("Main width: ", width)
 
-        //property alias meterModel: meterModel
+        property alias scopeView: hSplit.scopeView
+
         ToolBar{
             id:toolBar
             implicitWidth:window.width
@@ -107,6 +110,7 @@ Window {
             onHeightChanged: console.log("hSplit height: ", height )
             onWidthChanged: console.log("hSplit width: ", width)
 
+            property alias scopeView: vSplit.scopeView
             SplitView {
                 id:vSplit
                 orientation: Qt.Vertical
@@ -123,12 +127,11 @@ Window {
                     onWidthChanged: console.log("measure width: ", width)
                 }
 
-                //property alias scopeView: scopeView
+                property alias scopeView: graphicsPanel.scopeView
                 GraphicsPanel{
                     id:graphicsPanel
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    //property alias scopeView: scopeView
                 }
             }
 
