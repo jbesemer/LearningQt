@@ -1,6 +1,8 @@
 import QtQuick 2.0
 
 Item {
+    id: meterModel
+
     property int opMode:0
     property bool running:false
 

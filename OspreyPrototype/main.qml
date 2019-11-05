@@ -12,13 +12,18 @@ Window {
     color: "black"
     //property alias scopeView: scopeView
 
+    property MeterModel meterModel:MeterModel {
+        onZeroingFailed: toolBar.zeroingFailed()
+        onZeroingSucceeded: toolBar.zeroingSucceeded()
+    }
+
     ColumnLayout{
         id:main
         anchors.fill:parent
         onHeightChanged: console.log("Main height: ", height )
         onWidthChanged: console.log("Main width: ", width)
-        //property alias scopeView: scopeView
 
+        //property alias meterModel: meterModel
         ToolBar{
             id:toolBar
             implicitWidth:window.width
@@ -88,7 +93,7 @@ Window {
             Button{
                 text: "Cancel"
                 onClicked: {
-                    toolBar.finishZeroing()
+                    meterModel.finishZeroing()
                 }
             }
         }
@@ -118,13 +123,12 @@ Window {
                     onWidthChanged: console.log("measure width: ", width)
                 }
 
-                property alias scopeView: scopeView
-                ScopeView{
-                    id:scopeView
+                //property alias scopeView: scopeView
+                GraphicsPanel{
+                    id:graphicsPanel
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onHeightChanged: console.log("scope height: ", height )
-                    onWidthChanged: console.log("scope width: ", width)
+                    //property alias scopeView: scopeView
                 }
             }
 

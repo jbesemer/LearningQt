@@ -1,22 +1,66 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-import QtQuick.Layouts 1.0
+import QtQuick.Layouts 1.13
 
-// replaced by ScopeView
-Rectangle {
-    id: graphics
-    color: "lightgray"
-    Label {
-        text: "Graphics Panel"
-        anchors.centerIn: parent
+// GraphicsPanel.qml
+ColumnLayout {
+    TabBar {
+        id: bar
+        width: parent.width
+        height: 10
+        currentIndex: 0
+
+        TabButton {
+            text: qsTr("Trend")
+            height: parent.height
+        }
+        TabButton {
+            text: qsTr("Tuning")
+            height: parent.height
+            width:80
+        }
+        TabButton {
+            text: qsTr("Histogram")
+            height: parent.height
+            width: 100
+        }
+        TabButton {
+            text: qsTr("Beam Position")
+            height: parent.height
+            width: 100
+        }
     }
-    onHeightChanged: console.log("heightChanging")
 
-    MouseArea{
-        anchors.fill:parent
-        onClicked: {
-            console.log( "Clicked Graphics Panel" )
+    StackLayout {
+        id:stack
+        width: parent.width
+        currentIndex: bar.currentIndex
+
+        Item {
+            id: trendTab
+            ScopeView{
+                id:scopeView
+                anchors.fill: parent
+            }
+        }
+        Item {
+            id: tuningTab
+            Text {
+                text: qsTr("Tuning")
+            }
+        }
+        Item {
+            id: histogramTab
+            Text {
+                text: qsTr("Histogram")
+            }
+        }
+        Item {
+            id: beamPositionTab
+            Text {
+                text: qsTr("Beam Position")
+            }
         }
     }
 }

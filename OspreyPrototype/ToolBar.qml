@@ -10,29 +10,21 @@ ColumnLayout{
     height:40
 
     function startZeroing(){
+        console.log("startZeroing");
         errors.hide()
         controls.enabled=false
         meterModel.startZeroing()
         messages.show( "Zeroing Meter" )
     }
     function zeroingSucceeded(){
+        console.log("zeroingSucceeded");
         messages.hide()
         errors.hide()
         controls.enabled=true
     }
     function zeroingFailed(){
+        console.log("zeroingFailed");
         errors.show( "Zeroing error")
-    }
-
-    property MeterModel meterModel:MeterModel{
-        onZeroingFailed: {
-            console.log("zeroingFailed");
-            controls.zeroingFailed()
-        }
-        onZeroingSucceeded: {
-            console.log("zeroingSucceeded");
-            controls.zeroingSucceeded()
-        }
     }
 
     property int isEnabled: 1
@@ -71,8 +63,8 @@ ColumnLayout{
             //width: 40
             onChanged: {
                 zeroingButton.enabled=!running
-                scopeView.isRunning=running
-                MeterModel.setRunning(running);
+                //scopeView.isRunning=running
+                meterModel.setRunning(running);
             }
         }
 
