@@ -3,29 +3,39 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.0
 
+// ToolBar.qml
+
 ColumnLayout{
     id:controls
     height:40
 
-    property int isEnabled: 1
-
     function startZeroing(){
         errors.hide()
         controls.enabled=false
-        zeroingTimer.start()
+        meterModel.startZeroing()
         messages.show( "Zeroing Meter" )
     }
+    function zeroingSucceeded(){
+        messages.hide()
+        errors.hide()
+        controls.enabled=true
+    }
+    function zeroingFailed(){
+        errors.show( "Zeroing error")
+    }
 
-    function finishZeroing(){
-        var rand = Math.random()
-        if( rand < 0.5){
-            errors.show( "Zeroing error")
-        }else{
-            messages.hide()
-            errors.hide()
-            controls.enabled=true
+    property MeterModel meterModel:MeterModel{
+        onZeroingFailed: {
+            console.log("zeroingFailed");
+            controls.zeroingFailed()
+        }
+        onZeroingSucceeded: {
+            console.log("zeroingSucceeded");
+            controls.zeroingSucceeded()
         }
     }
+
+    property int isEnabled: 1
 
     RowLayout{
         id:buttons
@@ -73,15 +83,6 @@ ColumnLayout{
 
             onClicked:{
                 startZeroing()
-            }
-
-            Timer {
-                id: zeroingTimer
-                property int seconds: 2
-                interval: seconds * 1000
-                running: false
-                repeat: false
-                onTriggered: finishZeroing()
             }
         }
 

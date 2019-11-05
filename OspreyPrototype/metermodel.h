@@ -1,7 +1,8 @@
+#if false
 #ifndef METERMODEL_H
 #define METERMODEL_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 class MeterModel : public QObject
 {
@@ -17,6 +18,8 @@ public:
     int getOpMode() const { return m_opMode; }
     bool getRunning() const { return m_running; }
 
+Q_SIGNALS:
+
 signals:
     void modeChanged();
     void runningChanged( bool running );
@@ -31,3 +34,5 @@ private:
 };
 
 #endif // METERMODEL_H
+
+#endif // false

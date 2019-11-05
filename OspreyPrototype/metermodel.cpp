@@ -1,3 +1,4 @@
+#if false
 #include "metermodel.h"
 
 void MeterModel::setOpMode( int opMode ){
@@ -10,9 +11,12 @@ void MeterModel::setRunning( bool running ){
     emit runningChanged(m_running);
 }
 
+#if false
 void MeterModel::modeChanged(){
 }
 
 void MeterModel::runningChanged( bool running ){
 }
 
+#endif // false
+#endif // false
