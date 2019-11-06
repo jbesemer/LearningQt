@@ -102,8 +102,11 @@ ColumnLayout{
             onSeriesTypeChanged: scopeView.changeSeriesType(type);
             onRefreshRateChanged: scopeView.changeRefreshRate(rate);
             onAntialiasingEnabled: scopeView.antialiasing = enabled;
-            onOpenGlChanged: {
-                scopeView.openGL = enabled;
+            onOpenGlChanged: scopeView.openGL = enabled;
+            onOpModeChanged: {
+                console.log("opModeChanged: ", opMode, continuous )
+                meterModel.setOpMode( opMode )
+                meterModel.continuous = continuous
             }
         }
     }

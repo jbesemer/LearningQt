@@ -41,6 +41,8 @@ Item {
 
     property bool continuous: true
 
+    onContinuousChanged: console.log("meter.Continuous: ", continuous )
+
     property bool running: false
 
     function setRunning( isRunning ){
@@ -50,7 +52,6 @@ Item {
         else
             stop()
     }
-
 
     function start(){
         refreshTimer.repeat = continuous

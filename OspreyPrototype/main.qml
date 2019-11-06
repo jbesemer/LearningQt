@@ -8,7 +8,7 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Splitter Grid")
+    title: qsTr("Osprey Prototype")
     color: "black"
 
     property alias scopeView: mainPanel.scopeView
@@ -22,15 +22,15 @@ Window {
     ColumnLayout{
         id:mainPanel
         anchors.fill:parent
-        onHeightChanged: console.log("Main height: ", height )
-        onWidthChanged: console.log("Main width: ", width)
+        //onHeightChanged: console.log("Main height: ", height )
+        //onWidthChanged: console.log("Main width: ", width)
 
         property alias scopeView: hSplit.scopeView
 
         ToolBar{
             id:toolBar
             implicitWidth:window.width
-            onWidthChanged: console.log("toolbar width: ", width)
+            //onWidthChanged: console.log("toolbar width: ", width)
         }
 
         RowLayout{
@@ -96,7 +96,7 @@ Window {
             Button{
                 text: "Cancel"
                 onClicked: {
-                    meterModel.finishZeroing()
+                    meterModel.zeroingSucceeded()
                 }
             }
         }
@@ -107,8 +107,8 @@ Window {
             Layout.fillWidth: true
             Layout.fillHeight: true
             implicitWidth:window.width-statistics.implicitWidth
-            onHeightChanged: console.log("hSplit height: ", height )
-            onWidthChanged: console.log("hSplit width: ", width)
+            //onHeightChanged: console.log("hSplit height: ", height )
+            //onWidthChanged: console.log("hSplit width: ", width)
 
             property alias scopeView: vSplit.scopeView
             SplitView {
@@ -116,15 +116,15 @@ Window {
                 orientation: Qt.Vertical
                 implicitWidth: 420
                 //SplitView.fillWidth: true
-                onHeightChanged: console.log("vSplit height: ", height )
-                onWidthChanged: console.log("vSplit width: ", width)
+                //onHeightChanged: console.log("vSplit height: ", height )
+                //onWidthChanged: console.log("vSplit width: ", width)
 
                 MeasurementPanel{
                     //id:measurement
                     Layout.fillWidth: true
                     implicitHeight: 80
-                    onHeightChanged: console.log("measure height: ", height )
-                    onWidthChanged: console.log("measure width: ", width)
+                    //onHeightChanged: console.log("measure height: ", height )
+                    //onWidthChanged: console.log("measure width: ", width)
                 }
 
                 property alias scopeView: graphicsPanel.scopeView
@@ -140,8 +140,8 @@ Window {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 implicitWidth: 100
-                onHeightChanged: console.log("stats height: ", height )
-                onWidthChanged: console.log("stats width: ", width)
+                //onHeightChanged: console.log("stats height: ", height )
+                //onWidthChanged: console.log("stats width: ", width)
             }
         }
 
