@@ -30,5 +30,6 @@
         <file>images/burger2.png</file>
         <file>StatsModel.qml</file>
         <file>MeterModel.qml</file>
+        <file>MenuButton.qml</file>
     </qresource>
 </RCC>
