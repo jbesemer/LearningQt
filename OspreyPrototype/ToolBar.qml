@@ -42,6 +42,7 @@ ColumnLayout{
             Menu{
                 id:burgerMenu
                 y:burgerButton.height
+
                 MenuItem { text: "System Menu Item1" }
                 MenuItem { text: "System Menu Item2" }
                 MenuItem {
