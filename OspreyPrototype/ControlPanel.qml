@@ -87,9 +87,12 @@ RowLayout {
         text: "Continuous"
         items: ["Continuous", "OneShot"]
         currentSelection: 1
-        onSelectionChanged: opModeChanged( operatingModeButton.currentSelection, selection );
+        onSelectionChanged: opModeChanged( operatingModeButton.currentSelection, isContinuous() );
         property int index:3
         visible: firstIndex <= index && index <=  lastIndex
+        function isContinuous(){
+            return currentSelection == 0
+        }
     }
 
     MultiButton {
