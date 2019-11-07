@@ -10,7 +10,7 @@ Rectangle {
     signal changed(bool isRunning)
 
     property bool running:false
-    onRunningChanged:changed(running)
+    onRunningChanged:{console.log("running changed: ", running);changed(running)}
     onEnabledChanged: console.log("enabled: ", enabled)
 
     property alias image: image
@@ -18,8 +18,9 @@ Rectangle {
     function isRunning(){ return running }
     function isPaused(){ return !running }
     function setRunning(isRunning){
+        console.log("setRunning: ", running, "->", isRunning)
         running=isRunning
-        changed(running)
+        //changed(running)
     }
     function toggle(){
         setRunning(!running)
