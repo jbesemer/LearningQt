@@ -37,6 +37,16 @@ RowLayout {
         }
     }
 
+    function startRunning(){
+        //console.log("controlPanel.startRunning")
+        opModeButton.enabled = false
+    }
+
+    function stopRunning(){
+        //console.log("controlPanel.stopRunning")
+        opModeButton.enabled = true
+    }
+
     ImageButton{
         image.source: "images/action_left.png"
         width:scrollingIconWidth
@@ -45,11 +55,11 @@ RowLayout {
     }
 
     MultiButton {
-        id: operatingModeButton
+        id: opModeButton
         text: "Op Mode"
-        items: ["Power", "Energy", "BTU/F'night"]
+        items: ["Power", "Energy", "BTU/Fortnight"]
         currentSelection: 0
-        onSelectionChanged: opModeChanged( selection, continuousButton.currentSelection );
+        onSelectionChanged: opModeChanged( selection, continuousButton.isContinuous() );
         property int index:0
         visible: firstIndex <= index && index <=  lastIndex
     }
@@ -87,9 +97,12 @@ RowLayout {
         text: "Continuous"
         items: ["Continuous", "OneShot"]
         currentSelection: 1
-        onSelectionChanged: opModeChanged( operatingModeButton.currentSelection, selection );
+        onSelectionChanged: opModeChanged( opModeButton.currentSelection, isContinuous() );
         property int index:3
         visible: firstIndex <= index && index <=  lastIndex
+        function isContinuous(){
+            return currentSelection == 0
+        }
     }
 
     MultiButton {
@@ -180,6 +193,13 @@ RowLayout {
                 checkable: true
                 checked:true
                 onTriggered: antialiasingEnabled(checked)
+            }
+
+            MenuItem {
+                text: "Meter Connected"
+                checkable: true
+                checked:true
+                onTriggered: meterModel.connected = checked
             }
 
             MenuItem { text: "Configuration Menu Item2" }

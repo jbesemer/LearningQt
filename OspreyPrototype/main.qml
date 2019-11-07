@@ -8,21 +8,46 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Splitter Grid")
+    title: qsTr("Osprey Prototype")
     color: "black"
-    //property alias scopeView: scopeView
+
+    property alias scopeView: mainPanel.scopeView
+
+    property MeterModel meterModel: MeterModel {
+        onZeroingFailed: toolBar.zeroingFailed()
+        onZeroingSucceeded: toolBar.zeroingSucceeded()
+        onUpdateChart: scopeView.updateChart()
+        onStarted: toolBar.startRunning()
+        onStopped: toolBar.stopRunning()
+
+        onConnectedChanged: {
+            if( connected ){
+                messages.hide()
+                status.text="Connected: "
+                    + meterType + " "
+                    + sensorModel + " #"
+                    + sensorSerialNumber
+
+            }else{
+                messages.show( "Searching For Meter")
+                messages.showBusy=true
+                status.text="Searching For Meter"
+            }
+        }
+    }
 
     ColumnLayout{
-        id:main
+        id:mainPanel
         anchors.fill:parent
-        onHeightChanged: console.log("Main height: ", height )
-        onWidthChanged: console.log("Main width: ", width)
-        //property alias scopeView: scopeView
+        //onHeightChanged: console.log("Main height: ", height )
+        //onWidthChanged: console.log("Main width: ", width)
+
+        property alias scopeView: hSplit.scopeView
 
         ToolBar{
             id:toolBar
             implicitWidth:window.width
-            onWidthChanged: console.log("toolbar width: ", width)
+            //onWidthChanged: console.log("toolbar width: ", width)
         }
 
         RowLayout{
@@ -30,6 +55,7 @@ Window {
             visible: false
             implicitWidth:window.width
             Layout.alignment: Qt.AlignHCenter
+            property bool showBusy: false
 
             function show( message ){
                 messages.visible=true
@@ -38,10 +64,10 @@ Window {
 
             function hide(){
                 messages.visible=false
+                showBusy=false
             }
 
-            BusyIndicator{
-            }
+            BusyIndicator{ visible:messages.showBusy }
 
             Text{
                 id:messageText
@@ -49,8 +75,7 @@ Window {
                 font.pointSize: 18
             }
 
-            BusyIndicator{
-            }
+            BusyIndicator{ visible:messages.showBusy }
         }
 
         // TODO: consolidate messages and errors, with more elaborate
@@ -88,7 +113,7 @@ Window {
             Button{
                 text: "Cancel"
                 onClicked: {
-                    toolBar.finishZeroing()
+                    meterModel.zeroingSucceeded()
                 }
             }
         }
@@ -99,32 +124,31 @@ Window {
             Layout.fillWidth: true
             Layout.fillHeight: true
             implicitWidth:window.width-statistics.implicitWidth
-            onHeightChanged: console.log("hSplit height: ", height )
-            onWidthChanged: console.log("hSplit width: ", width)
+            //onHeightChanged: console.log("hSplit height: ", height )
+            //onWidthChanged: console.log("hSplit width: ", width)
 
+            property alias scopeView: vSplit.scopeView
             SplitView {
                 id:vSplit
                 orientation: Qt.Vertical
                 implicitWidth: 420
                 //SplitView.fillWidth: true
-                onHeightChanged: console.log("vSplit height: ", height )
-                onWidthChanged: console.log("vSplit width: ", width)
+                //onHeightChanged: console.log("vSplit height: ", height )
+                //onWidthChanged: console.log("vSplit width: ", width)
 
                 MeasurementPanel{
                     //id:measurement
                     Layout.fillWidth: true
                     implicitHeight: 80
-                    onHeightChanged: console.log("measure height: ", height )
-                    onWidthChanged: console.log("measure width: ", width)
+                    //onHeightChanged: console.log("measure height: ", height )
+                    //onWidthChanged: console.log("measure width: ", width)
                 }
 
-                property alias scopeView: scopeView
-                ScopeView{
-                    id:scopeView
+                property alias scopeView: graphicsPanel.scopeView
+                GraphicsPanel{
+                    id:graphicsPanel
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onHeightChanged: console.log("scope height: ", height )
-                    onWidthChanged: console.log("scope width: ", width)
                 }
             }
 
@@ -133,8 +157,8 @@ Window {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 implicitWidth: 100
-                onHeightChanged: console.log("stats height: ", height )
-                onWidthChanged: console.log("stats width: ", width)
+                //onHeightChanged: console.log("stats height: ", height )
+                //onWidthChanged: console.log("stats width: ", width)
             }
         }
 
@@ -143,7 +167,8 @@ Window {
             Layout.fillWidth: true
             height:20
             Text{
-                anchors.centerIn: parent
+                id:status
+                //anchors.centerIn: parent
                 text: "Status Bar: Situation Normal"
             }
         }

@@ -6,24 +6,19 @@ Rectangle {
     width:32
     height:32
 
+    property alias image: image
+
     signal clicked(bool isRunning)
     signal changed(bool isRunning)
 
-    property bool running:false
-    onRunningChanged:changed(running)
-    onEnabledChanged: console.log("enabled: ", enabled)
+    function toggle(){ running = !running }
 
-    property alias image: image
-
-    function isRunning(){ return running }
-    function isPaused(){ return !running }
-    function setRunning(isRunning){
-        running=isRunning
+    property bool running: false
+    onRunningChanged: {
+        //console.log("ToggleButton.running: ", !running, "->", running)
         changed(running)
     }
-    function toggle(){
-        setRunning(!running)
-    }
+    // onEnabledChanged:
 
     Image {
       id:image

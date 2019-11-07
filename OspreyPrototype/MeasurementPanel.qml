@@ -7,7 +7,7 @@ Rectangle {
     id:measurement
     color: "lightblue"
 
-    Row{
+    RowLayout{
         anchors.fill:parent
 
         Text {
@@ -17,7 +17,7 @@ Rectangle {
             verticalAlignment: Text.AlignBottom
             horizontalAlignment: Text.AlignRight
 
-            text:"3.254"
+            text: meterModel.connected?"3.254":"-.--"
             font.pixelSize: measurement.height*0.9
         }
         Text {
@@ -27,11 +27,10 @@ Rectangle {
             verticalAlignment: Text.AlignBottom
             horizontalAlignment: Text.AlignRight
 
-            text:"mW"
+            text:" " + meterModel.connected?"mW":"W"
             font.pixelSize: measurement.height*0.6
         }
     }
-
     MouseArea{
         anchors.fill:parent
         onClicked: {

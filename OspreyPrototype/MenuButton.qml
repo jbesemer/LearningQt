@@ -5,11 +5,16 @@ import QtQuick.Layouts 1.0
 
 Item {
     id: button
-
     property string text: "Option: "
     property variant items: ["first"]
-    property int currentSelection: 0
+    property Menu menu
+    property variant currentSelection: items[0]
     signal selectionChanged(variant selection)
+
+    function select(index){
+        currentSelection = index
+        selectionChanged()
+    }
 
     implicitWidth: buttonText.implicitWidth + 5
     implicitHeight: buttonText.implicitHeight// + 2//10
@@ -18,7 +23,7 @@ Item {
         id: buttonText
         width: parent.width
         height: parent.height
-        opacity: enabled ? 1.0 : 0.5
+        onClicked: menu.open()
 
         style: ButtonStyle {
             label: Component {
@@ -35,8 +40,6 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                         font.pointSize: 8
-                        //verticalAlignment: Text.AlignVCenter
-                        //horizontalAlignment: Text.AlignHCenter
                     }
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -44,15 +47,9 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         font.pointSize: 12
-                        //verticalAlignment: Text.AlignVCenter
-                        //horizontalAlignment: Text.AlignHCenter
                     }
                 }
             }
-        }
-        onClicked: {
-            currentSelection = (currentSelection + 1) % items.length;
-            selectionChanged(button.items[currentSelection]);
         }
     }
 }
