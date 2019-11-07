@@ -19,6 +19,21 @@ Window {
         onUpdateChart: scopeView.updateChart()
         onStarted: toolBar.startRunning()
         onStopped: toolBar.stopRunning()
+
+        onConnectedChanged: {
+            if( connected ){
+                messages.hide()
+                status.text="Connected: "
+                    + meterType + " "
+                    + sensorModel + " #"
+                    + sensorSerialNumber
+
+            }else{
+                messages.show( "Searching For Meter")
+                messages.showBusy=true
+                status.text="Searching For Meter"
+            }
+        }
     }
 
     ColumnLayout{
@@ -40,6 +55,7 @@ Window {
             visible: false
             implicitWidth:window.width
             Layout.alignment: Qt.AlignHCenter
+            property bool showBusy: false
 
             function show( message ){
                 messages.visible=true
@@ -48,9 +64,10 @@ Window {
 
             function hide(){
                 messages.visible=false
+                showBusy=false
             }
 
-            //BusyIndicator{ padding:10 }
+            BusyIndicator{ visible:messages.showBusy }
 
             Text{
                 id:messageText
@@ -58,7 +75,7 @@ Window {
                 font.pointSize: 18
             }
 
-            //BusyIndicator{ padding:10 }
+            BusyIndicator{ visible:messages.showBusy }
         }
 
         // TODO: consolidate messages and errors, with more elaborate
@@ -150,7 +167,8 @@ Window {
             Layout.fillWidth: true
             height:20
             Text{
-                anchors.centerIn: parent
+                id:status
+                //anchors.centerIn: parent
                 text: "Status Bar: Situation Normal"
             }
         }

@@ -3,6 +3,18 @@ import QtQuick 2.0
 Item {
     id: meterModel
 
+    // Connect, Disconnect, Identification //////////////////////////
+
+    property bool connected: true
+
+    property string meterType: "Thermo,Single"
+    property string sensorModel: "PM10"
+    property string sensorSerialNumber:"3434000"
+
+    // legacy meters:
+    property string meterSerialNumber:"engr123355"
+    property string meterModel:"PowerMax"
+
     // Zeroing //////////////////////////////////////////////////////
 
     property bool zeroing: false

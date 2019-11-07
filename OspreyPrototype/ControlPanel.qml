@@ -195,6 +195,13 @@ RowLayout {
                 onTriggered: antialiasingEnabled(checked)
             }
 
+            MenuItem {
+                text: "Meter Connected"
+                checkable: true
+                checked:true
+                onTriggered: meterModel.connected = checked
+            }
+
             MenuItem { text: "Configuration Menu Item2" }
             MenuItem { text: "Configuration Menu Item3" }
         }
