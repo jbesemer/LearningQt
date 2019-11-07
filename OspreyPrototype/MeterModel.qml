@@ -18,7 +18,7 @@ Item {
     function finishZeroing(){
         console.log("finishZeroing");
         var rand = Math.random()
-        if( rand < 0.5){
+        if( rand < 0.2){
             zeroingFailed()
         }else{
             zeroing = false

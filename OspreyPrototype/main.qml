@@ -17,8 +17,8 @@ Window {
         onZeroingFailed: toolBar.zeroingFailed()
         onZeroingSucceeded: toolBar.zeroingSucceeded()
         onUpdateChart: scopeView.updateChart()
-        onStarted:toolBar.startRunning()
-        onStopped:toolBar.stopRunning()
+        onStarted: toolBar.startRunning()
+        onStopped: toolBar.stopRunning()
     }
 
     ColumnLayout{
@@ -50,8 +50,7 @@ Window {
                 messages.visible=false
             }
 
-            BusyIndicator{
-            }
+            //BusyIndicator{ padding:10 }
 
             Text{
                 id:messageText
@@ -59,8 +58,7 @@ Window {
                 font.pointSize: 18
             }
 
-            BusyIndicator{
-            }
+            //BusyIndicator{ padding:10 }
         }
 
         // TODO: consolidate messages and errors, with more elaborate

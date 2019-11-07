@@ -12,14 +12,14 @@ ColumnLayout{
     function startRunning(){
         console.log("toolbar.startRunning");
         controlPanel.startRunning()
-        runPauseButton.setRunning(true)
+        runPauseButton.running = true
         isEnabled=false
     }
 
     function stopRunning(){
         console.log("toolbar.stopRunning");
         controlPanel.stopRunning()
-        runPauseButton.setRunning(false)
+        runPauseButton.running = false
         isEnabled=true
     }
 
@@ -83,7 +83,7 @@ ColumnLayout{
             }
         }
 
-        ToggleButton{
+        ImageButton{
             id: zeroingButton
             width:32; height: 32
             image.source:"images/download.png"

@@ -11,11 +11,7 @@ Rectangle {
     signal clicked(bool isRunning)
     signal changed(bool isRunning)
 
-
-    function isRunning(){ return running }
-    function isPaused(){ return !running }
-    function setRunning(isRunning){ running=isRunning }
-    function toggle(){ setRunning(!running) }
+    function toggle(){ running = !running }
 
     property bool running: false
     onRunningChanged: {
