@@ -3,7 +3,9 @@ import QtQuick 2.0
 Item {
     id: meterModel
 
-    property bool zeroing:false
+    // Zeroing //////////////////////////////////////////////////////
+
+    property bool zeroing: false
 
     signal zeroingSucceeded()
     signal zeroingFailed()
@@ -33,36 +35,38 @@ Item {
         onTriggered: finishZeroing()
     }
 
+    // OpMode & Continuous //////////////////////////////////////////
+
     property int opMode: 0
 
     function setOpMode( mode ){
         opMode=mode
     }
 
-    property bool continuous: true
+    property bool continuous: false
 
     onContinuousChanged: console.log("meter.Continuous: ", continuous )
 
+    // Running //////////////////////////////////////////////////////
+
     property bool running: false
+    property bool wasRunning: false
 
-    function setRunning( isRunning ){
-        running=isRunning
-        if(running)
-            start()
-        else
-            stop()
+    onRunningChanged: {
+        console.log("meter.running changed: ", wasRunning, "->", running )
+        if(running){
+            refreshTimer.repeat = continuous
+            refreshTimer.start()
+            started()
+        }else{
+            refreshTimer.stop()
+            stopped()
+        }
+        wasRunning=running
     }
 
-    function start(){
-        refreshTimer.repeat = continuous
-        refreshTimer.start()
-        started()
-    }
-
-    function stop(){
-        refreshTimer.stop()
-        stopped()
-    }
+    function start(){ running=true }
+    function stop(){ running=false }
 
     signal started()
     signal stopped()
@@ -74,9 +78,12 @@ Item {
         running: false
         repeat: true
         onTriggered: {
+            //console.log("Meter.Timer.UpdateChart" )
             updateChart()
-            if(!continuous)
-                stop()
+            //console.log("Meter.Timer.Continuous: ", continuous )
+            if(!continuous){
+                meterModel.stop()
+            }
             //dataSource.update(chartView.series(0));
             //dataSource.update(chartView.series(1));
         }

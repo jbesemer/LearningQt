@@ -17,6 +17,8 @@ Window {
         onZeroingFailed: toolBar.zeroingFailed()
         onZeroingSucceeded: toolBar.zeroingSucceeded()
         onUpdateChart: scopeView.updateChart()
+        onStarted:toolBar.startRunning()
+        onStopped:toolBar.stopRunning()
     }
 
     ColumnLayout{

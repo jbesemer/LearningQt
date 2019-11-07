@@ -9,6 +9,20 @@ ColumnLayout{
     id:controls
     height:40
 
+    function startRunning(){
+        console.log("toolbar.startRunning");
+        controlPanel.startRunning()
+        runPauseButton.setRunning(true)
+        isEnabled=false
+    }
+
+    function stopRunning(){
+        console.log("toolbar.stopRunning");
+        controlPanel.stopRunning()
+        runPauseButton.setRunning(false)
+        isEnabled=true
+    }
+
     function startZeroing(){
         console.log("startZeroing");
         errors.hide()
@@ -27,7 +41,7 @@ ColumnLayout{
         errors.show( "Zeroing error")
     }
 
-    property int isEnabled: 1
+    property int isEnabled: !(meterModel.running || meterModel.zeroing)
 
     RowLayout{
         id:buttons
@@ -65,7 +79,7 @@ ColumnLayout{
             onChanged: {
                 zeroingButton.enabled=!running
                 //scopeView.isRunning=running
-                meterModel.setRunning(running);
+                meterModel.running=running;
             }
         }
 

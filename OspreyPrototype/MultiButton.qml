@@ -18,6 +18,7 @@ Item {
         id: buttonText
         width: parent.width
         height: parent.height
+        opacity: enabled ? 1.0 : 0.5
 
         style: ButtonStyle {
             label: Component {

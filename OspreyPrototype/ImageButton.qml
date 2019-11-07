@@ -7,7 +7,7 @@ Rectangle {
 
     signal clicked()
 
-    onEnabledChanged: console.log("enabled: ", enabled)
+    // onEnabledChanged: console.log("enabled: ", enabled)
 
     property alias image: image
 

@@ -7,7 +7,7 @@ Rectangle {
     id:measurement
     color: "lightblue"
 
-    Row{
+    RowLayout{
         anchors.fill:parent
 
         Text {
@@ -31,7 +31,6 @@ Rectangle {
             font.pixelSize: measurement.height*0.6
         }
     }
-
     MouseArea{
         anchors.fill:parent
         onClicked: {

@@ -37,6 +37,16 @@ RowLayout {
         }
     }
 
+    function startRunning(){
+        //console.log("controlPanel.startRunning")
+        opModeButton.enabled = false
+    }
+
+    function stopRunning(){
+        //console.log("controlPanel.stopRunning")
+        opModeButton.enabled = true
+    }
+
     ImageButton{
         image.source: "images/action_left.png"
         width:scrollingIconWidth
@@ -45,7 +55,7 @@ RowLayout {
     }
 
     MultiButton {
-        id: operatingModeButton
+        id: opModeButton
         text: "Op Mode"
         items: ["Power", "Energy", "BTU/Fortnight"]
         currentSelection: 0
@@ -87,7 +97,7 @@ RowLayout {
         text: "Continuous"
         items: ["Continuous", "OneShot"]
         currentSelection: 1
-        onSelectionChanged: opModeChanged( operatingModeButton.currentSelection, isContinuous() );
+        onSelectionChanged: opModeChanged( opModeButton.currentSelection, isContinuous() );
         property int index:3
         visible: firstIndex <= index && index <=  lastIndex
         function isContinuous(){
