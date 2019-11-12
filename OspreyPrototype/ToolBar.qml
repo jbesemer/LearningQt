@@ -8,6 +8,8 @@ import QtQuick.Layouts 1.0
 ColumnLayout{
     id:controls
     height:40
+    //Layout.margins:0
+    Layout.topMargin: 4
 
     function startRunning(){
         console.log("toolbar.startRunning");
@@ -50,7 +52,9 @@ ColumnLayout{
 
         ImageButton{
             id:burgerButton
-            image.source: "images/burger2.png"
+            // image.source: "images/burger2.png"
+            image.source:"images/CoherentLogo.png"
+            width:40; height:40
             onClicked: burgerMenu.open()
 
             Menu{
@@ -66,10 +70,20 @@ ColumnLayout{
             }
         }
 
+        Rectangle{
+            id: logo
+            width:32; height:32
+            Image{
+                anchors.fill:parent
+                source:"images/CoherentLogo.png"
+            }
+            visible: false
+        }
         Text {
-            text: "Osprey"
+            text: "Coherent"
             font.pointSize: 16
             color: "white"
+            visible: false
         }
 
         ToggleButton{
