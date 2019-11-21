@@ -49,7 +49,7 @@ Item {
 
     // OpMode & Continuous //////////////////////////////////////////
 
-    property int opMode: 0
+    property string opMode: "Power"
 
     function setOpMode( mode ){
         opMode=mode

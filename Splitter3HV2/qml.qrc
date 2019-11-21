@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainPanels.qml</file>
+        <file>SplitterBar.qml</file>
+    </qresource>
+</RCC>

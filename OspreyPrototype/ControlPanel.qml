@@ -50,7 +50,7 @@ RowLayout {
     ImageButton{
         image.source: "images/action_left.png"
         width:scrollingIconWidth
-        enabled: firstIndex > 0
+        visible: firstIndex > 0
         onClicked:scrollLeft()
     }
 
@@ -161,7 +161,7 @@ RowLayout {
     ImageButton{
         image.source: "images/action_right.png"
         width:scrollingIconWidth
-        enabled: lastIndex < maxIndex
+        visible: lastIndex < maxIndex
         onClicked:scrollRight()
     }
 

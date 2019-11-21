@@ -31,5 +31,6 @@
         <file>StatsModel.qml</file>
         <file>MeterModel.qml</file>
         <file>MenuButton.qml</file>
+        <file>images/CoherentLogo.png</file>
     </qresource>
 </RCC>
