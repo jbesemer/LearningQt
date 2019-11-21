@@ -8,10 +8,13 @@ Column{
     anchors.fill: parent
     //orientation: Qt.Vertical
 
+    property int upperPanelHeight: 60
+    property int lowerPanelHeight: 60
+
     Rectangle {
         id:upperPanel
         width:parent.width
-        implicitHeight: 40
+        implicitHeight: upperPanelHeight
         color: "lightgreen"
         Label {
             text: "upperMenu"
@@ -23,13 +26,16 @@ Column{
             onClicked: {
                 console.log( "Clicked upperPanel" )
             }
+            onDoubleClicked: {
+                upperSplitter.toggle()
+            }
         }
     }
 
     SplitterBar{
         id: upperSplitter
         isUp:true
-        onClick:{
+        onToggled:{
             upperPanel.visible=!upperPanel.visible
         }
     }
@@ -46,7 +52,7 @@ Column{
 
     SplitterBar{
         id: lowerSplitter
-        onClick:{
+        onToggled:{
             lowerPanel.visible=!lowerPanel.visible
         }
     }
@@ -55,7 +61,7 @@ Column{
         id:lowerPanel
         //SplitView.fillWidth: true
         width:parent.width
-        implicitHeight: 40
+        implicitHeight: lowerPanelHeight
         color: "lightgreen"
         Label {
             text: "lowerPanel"
@@ -66,6 +72,9 @@ Column{
             anchors.fill:parent
             onClicked: {
                 console.log( "Clicked lowerPanel" )
+            }
+            onDoubleClicked: {
+                lowerSplitter.toggle()
             }
         }
     }

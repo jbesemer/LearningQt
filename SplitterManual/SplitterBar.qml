@@ -19,14 +19,19 @@ Rectangle {
 
     property bool isUp:false
 
-    signal click(bool isUp)
+    signal toggled(bool isUp)
+
+    function toggle(){
+        isUp=!isUp
+        toggled(isUp)
+    }
 
     MouseArea{
         id:mouseArea
         anchors.fill: parent
-        onClicked: {
-            isUp=!isUp
-            click(isUp)
-        }
+        onClicked: { console.log("Clicked"); toggle() }
+        // need doubleClicked event but only to suppress second click
+        // (of double-clicks). the first click does all the work.
+        onDoubleClicked: { console.log("DoubleClicked") } //; toggle() }
     }
 }
