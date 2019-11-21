@@ -4,24 +4,29 @@ Rectangle {
     // orientation: vertical means for vertical splitview,
     // which actually is a horizontal rectangle
     property int orientation:Qt.Vertical
-    property int thickness: 5
+    property int thickness: 9
     width: orientation===Qt.Vertical ? parent.width : thickness
     height: orientation===Qt.Vertical ? thickness : parent.height
 
-    color:"lightgreen"
+    color:"lightgrey"
 
-    Rectangle{
-        implicitHeight: 4
-        implicitWidth: 32
+    Image{
+        height: thickness-2
+        width: 32
         anchors.centerIn: parent
-        color: Qt.darker(parent.color, 3.0)
+        source:isUp?"action_up.png":"action_down.png"
     }
 
-    signal click()
+    property bool isUp:false
+
+    signal click(bool isUp)
 
     MouseArea{
         id:mouseArea
         anchors.fill: parent
-        onClicked: click()
+        onClicked: {
+            isUp=!isUp
+            click(isUp)
+        }
     }
 }

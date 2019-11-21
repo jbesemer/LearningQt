@@ -4,5 +4,7 @@
         <file>MainPanels.qml</file>
         <file>SplitterBar.qml</file>
         <file>MiddlePanels.qml</file>
+        <file>action_down.png</file>
+        <file>action_up.png</file>
     </qresource>
 </RCC>

@@ -28,6 +28,7 @@ Column{
 
     SplitterBar{
         id: upperSplitter
+        isUp:true
         onClick:{
             upperPanel.visible=!upperPanel.visible
         }
