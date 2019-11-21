@@ -10,15 +10,38 @@ Window {
     title: qsTr("Hello World")
 
     Drawer{
+        id:drawerBottom
+        width:window.width
+        edge: Qt.BottomEdge
+        height:50
+        dragMargin: 50
+
+        Rectangle{
+            color:"green"
+            anchors.fill: parent
+            Text{
+                text:"Content galore"
+                color:"white"
+                anchors.centerIn: parent
+            }
+       }
+    }
+
+    Drawer{
         id:drawer
+        edge: Qt.TopEdge
         width:window.width
         height:50
-        edge: Qt.BottomEdge
+        dragMargin: 50
 
-        Label{
-            text:"Content galore"
-            anchors.centerIn: parent
+        Rectangle{
+            color:"blue"
+            anchors.fill: parent
+            Text{
+                text:"Content galore"
+                color:"white"
+                anchors.centerIn: parent
+            }
         }
-
     }
 }
