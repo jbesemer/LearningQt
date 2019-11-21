@@ -41,18 +41,16 @@ SplitView {
                 var handleIndex=getHandleIndex(handleRect)
                 console.log( "Clicked handle ", handleIndex)
                 if(handleIndex==2){ // upper panel
-                    upperPanel.visible = !upperPanel.visible
-                    if(upperPanel.visible){
-                        //upperPanel.visible=false
+                    if(upperPanel.height<upperPanel.implicitHeight){
+                        upperPanel.height = upperPanel.implicitHeight
                     }else{
-                        // upperPanel.height=upperPanel.implicitHeight
+                        upperPanel.height=0
                     }
                 }else if(handleIndex==4){ // lower panel
-                    lowerPanel.visible = !lowerPanel.visible
-                    if(lowerPanel.visible){
-                        // lowerPanel.visible=false
+                    if(lowerPanel.height<lowerPanel.implicitHeight){
+                        lowerPanel.height = lowerPanel.implicitHeight
                     }else{
-                        // lowerPanel.height=lowerPanel.implicitHeight
+                        lowerPanel.height=0
                     }
                 }else
                     console.log("bad index")

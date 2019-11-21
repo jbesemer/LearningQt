@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>MainPanels.qml</file>
         <file>SplitterBar.qml</file>
+        <file>MiddlePanels.qml</file>
     </qresource>
 </RCC>
